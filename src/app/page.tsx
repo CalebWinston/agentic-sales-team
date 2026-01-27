@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { EmailSignup } from '@/components/email-signup';
 import { FeedbackWidget } from '@/components/feedback-widget';
 import { GitHubStars } from '@/components/github-stars';
+import { AnimatedChatDemo } from '@/components/animated-chat-demo';
 import {
   ArrowRight,
   Building2,
@@ -151,73 +152,9 @@ export default function Home() {
               Save 5+ hours per week on research, emails, and call prep
             </p>
 
-            {/* Command snippet */}
-            <div className="relative max-w-2xl mx-auto mb-12">
-              <div className="bg-zinc-900/80 rounded-2xl border border-zinc-700/50 p-6 md:p-8 font-mono text-sm md:text-base backdrop-blur-sm shadow-2xl shadow-black/40">
-                {/* Terminal header */}
-                <div className="flex items-center justify-between mb-5 pb-4 border-b border-zinc-700/50">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-2">
-                      <div className="w-3.5 h-3.5 rounded-full bg-red-500" />
-                      <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
-                      <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
-                    </div>
-                    <span className="text-sm text-zinc-400 font-sans">Claude Code</span>
-                  </div>
-                  <span className="text-xs text-zinc-500 font-sans">gtm-skills</span>
-                </div>
-
-                {/* Command lines */}
-                <div className="space-y-4">
-                  {/* Line 1 - Comment */}
-                  <div className="text-zinc-500 text-sm">
-                    <span className="text-zinc-600"># Research any company instantly</span>
-                  </div>
-
-                  {/* Line 2 - Main command */}
-                  <div className="flex items-start gap-2">
-                    <span className="text-emerald-400 select-none">$</span>
-                    <div className="flex-1">
-                      <span className="text-orange-400 font-bold">/gtm</span>
-                      <span className="text-zinc-100"> research </span>
-                      <span className="text-cyan-400">Acme Corp</span>
-                      <span className="text-zinc-100"> for </span>
-                      <span className="text-purple-400">enterprise sales</span>
-                      <span className="animate-pulse text-orange-400 ml-1">|</span>
-                    </div>
-                  </div>
-
-                  {/* Line 3 - Output preview */}
-                  <div className="mt-4 pt-4 border-t border-zinc-800/50 space-y-2">
-                    <div className="flex items-center gap-2 text-zinc-400 text-sm">
-                      <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-                      <span className="text-zinc-300">Generating research brief...</span>
-                    </div>
-                    <div className="pl-5 space-y-1.5 text-sm">
-                      <div className="text-zinc-500">
-                        <span className="text-green-400">✓</span> Company overview & recent news
-                      </div>
-                      <div className="text-zinc-500">
-                        <span className="text-green-400">✓</span> Key stakeholders & org structure
-                      </div>
-                      <div className="text-zinc-500">
-                        <span className="text-green-400">✓</span> Pain points & buying triggers
-                      </div>
-                      <div className="text-zinc-500">
-                        <span className="text-green-400">✓</span> Personalized outreach angles
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom tagline */}
-              <div className="mt-4 text-center">
-                <p className="text-sm text-zinc-500">
-                  One command. Full GTM power.
-                  <span className="text-zinc-400 ml-2">Works in Claude Code, Projects & Chat.</span>
-                </p>
-              </div>
+            {/* Animated Command Demo */}
+            <div className="mb-12">
+              <AnimatedChatDemo />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
