@@ -152,25 +152,71 @@ export default function Home() {
             </p>
 
             {/* Command snippet */}
-            <div className="relative max-w-lg mx-auto mb-10">
-              <div className="bg-zinc-700/40 rounded-2xl border border-zinc-600/50 p-5 font-mono text-base backdrop-blur-sm shadow-lg shadow-black/20">
-                <div className="flex items-center gap-2 text-zinc-300 mb-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-400" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                    <div className="w-3 h-3 rounded-full bg-green-400" />
+            <div className="relative max-w-2xl mx-auto mb-12">
+              <div className="bg-zinc-900/80 rounded-2xl border border-zinc-700/50 p-6 md:p-8 font-mono text-sm md:text-base backdrop-blur-sm shadow-2xl shadow-black/40">
+                {/* Terminal header */}
+                <div className="flex items-center justify-between mb-5 pb-4 border-b border-zinc-700/50">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-2">
+                      <div className="w-3.5 h-3.5 rounded-full bg-red-500" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-yellow-500" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-green-500" />
+                    </div>
+                    <span className="text-sm text-zinc-400 font-sans">Claude Code</span>
                   </div>
-                  <span className="text-xs ml-1">Claude</span>
+                  <span className="text-xs text-zinc-500 font-sans">gtm-skills</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-zinc-400">{">"}</span>
-                  <span className="text-orange-400 font-semibold">/gtm</span>
-                  <span className="text-zinc-100">research Stripe for enterprise sales outreach</span>
-                  <span className="animate-pulse text-orange-400">|</span>
+
+                {/* Command lines */}
+                <div className="space-y-4">
+                  {/* Line 1 - Comment */}
+                  <div className="text-zinc-500 text-sm">
+                    <span className="text-zinc-600"># Research any company instantly</span>
+                  </div>
+
+                  {/* Line 2 - Main command */}
+                  <div className="flex items-start gap-2">
+                    <span className="text-emerald-400 select-none">$</span>
+                    <div className="flex-1">
+                      <span className="text-orange-400 font-bold">/gtm</span>
+                      <span className="text-zinc-100"> research </span>
+                      <span className="text-cyan-400">Stripe</span>
+                      <span className="text-zinc-100"> for </span>
+                      <span className="text-purple-400">enterprise sales</span>
+                      <span className="animate-pulse text-orange-400 ml-1">|</span>
+                    </div>
+                  </div>
+
+                  {/* Line 3 - Output preview */}
+                  <div className="mt-4 pt-4 border-t border-zinc-800/50 space-y-2">
+                    <div className="flex items-center gap-2 text-zinc-400 text-sm">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+                      <span className="text-zinc-300">Generating research brief...</span>
+                    </div>
+                    <div className="pl-5 space-y-1.5 text-sm">
+                      <div className="text-zinc-500">
+                        <span className="text-green-400">✓</span> Company overview & recent news
+                      </div>
+                      <div className="text-zinc-500">
+                        <span className="text-green-400">✓</span> Key stakeholders & org structure
+                      </div>
+                      <div className="text-zinc-500">
+                        <span className="text-green-400">✓</span> Pain points & buying triggers
+                      </div>
+                      <div className="text-zinc-500">
+                        <span className="text-green-400">✓</span> Personalized outreach angles
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-sm text-zinc-400">
-                One command. Full GTM power.
+
+              {/* Bottom tagline */}
+              <div className="mt-4 text-center">
+                <p className="text-sm text-zinc-500">
+                  One command. Full GTM power.
+                  <span className="text-zinc-400 ml-2">Works in Claude Code, Projects & Chat.</span>
+                </p>
               </div>
             </div>
 
