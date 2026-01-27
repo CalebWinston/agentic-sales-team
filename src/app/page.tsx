@@ -129,7 +129,7 @@ const categories = [
   {
     name: 'MCP Server',
     description: '10 AI tools + 6 interactive UIs for Claude',
-    href: '/mcp',
+    href: '/free-tools/mcp-server',
     icon: Zap,
     count: 'New',
     color: 'from-amber-500 to-yellow-500',
@@ -416,7 +416,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link href="/mcp">
+              <Link href="/free-tools/mcp-server">
                 <Button className="gap-2">
                   Explore MCP Server
                   <ArrowRight className="h-4 w-4" />

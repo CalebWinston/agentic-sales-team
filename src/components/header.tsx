@@ -6,11 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, Github, Download } from 'lucide-react';
 
 const navigation = [
-  { name: 'Free Tools', href: '/free-tools' },
   { name: 'Industry', href: '/industry' },
   { name: 'Role', href: '/role' },
   { name: 'Workflow', href: '/workflow' },
   { name: 'Methodology', href: '/methodology' },
+  { name: 'Tonality', href: '/free-tools/tonalities' },
+  { name: 'Free Tools', href: '/free-tools' },
 ];
 
 export function Header() {
