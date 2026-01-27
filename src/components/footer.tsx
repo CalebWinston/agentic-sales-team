@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { Github, Twitter } from 'lucide-react';
+import { ProspedaLink } from '@/components/tracked-link';
 
 const footerLinks = {
   Resources: [
@@ -85,12 +88,12 @@ export function Footer() {
           </p>
           <p className="text-sm text-muted-foreground">
             Built by{' '}
-            <a
-              href="https://prospeda.com"
+            <ProspedaLink
+              location="footer"
               className="text-foreground hover:underline"
             >
               Prospeda
-            </a>
+            </ProspedaLink>
           </p>
         </div>
       </div>
