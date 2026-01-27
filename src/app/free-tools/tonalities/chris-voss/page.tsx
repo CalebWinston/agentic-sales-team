@@ -1,392 +1,351 @@
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/copy-button';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, MessageSquare } from 'lucide-react';
 import type { Metadata } from 'next';
+import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Chris Voss Tonality | FBI Negotiation for Sales',
-  description: 'Write like Chris Voss. Tactical empathy, calibrated questions, labeling emotions. Copy-paste prompts from Never Split the Difference.',
+  title: 'Chris Voss Tonality | Tactical Empathy Sales Writing | Free GTM Prompts',
+  description: 'Write like Chris Voss. Tactical empathy, calibrated questions, FBI negotiation techniques. Copy these Claude/ChatGPT prompts for negotiations and objection handling.',
+  keywords: 'chris voss negotiation, tactical empathy sales, fbi negotiation techniques, never split the difference sales, calibrated questions, mirroring sales',
   openGraph: {
-    title: 'The Chris Voss Approach to Sales Communication',
-    description: 'FBI hostage negotiation techniques adapted for B2B sales. Tactical empathy and calibrated questions.',
+    title: 'Chris Voss Tonality | Tactical Empathy Sales Writing',
+    description: 'Write like Chris Voss. Tactical empathy, calibrated questions. Free prompts for Claude & ChatGPT.',
+    type: 'website',
   },
 };
 
-const prompts = [
-  {
-    id: 'voss-cold-email',
-    title: 'Re-Engagement Email Prompt',
-    description: 'Bring cold leads back with Voss techniques',
-    prompt: `Write a re-engagement email using Chris Voss negotiation techniques.
+const coldEmailPrompt = `Write a cold email in the Chris Voss tonality.
 
 Context:
-- Contact: [NAME at COMPANY]
-- Last interaction: [WHAT HAPPENED / HOW LONG AGO]
-- What I'm selling: [YOUR PRODUCT]
-- Why they went cold: [YOUR THEORY]
+- Prospect: [NAME], [TITLE] at [COMPANY]
+- Their likely frustration: [PAIN POINT YOU'VE IDENTIFIED]
+- My product: [What you sell]
+- How we help: [THE OUTCOME YOU DELIVER]
 
-Chris Voss Email Rules:
-- Use a no-oriented question in the subject line
-- Open with a label ("It seems like..." / "It sounds like...")
-- Acknowledge the elephant in the room
-- Use "I'm afraid..." softeners
-- Ask calibrated "How" or "What" questions
-- Give them permission to say no
-- Mirror their likely concerns
+Chris Voss Style Rules:
+- Start with a label: "It seems like..." or "It sounds like..."
+- Acknowledge their likely emotional state before pitching
+- Use tactical empathy—show you understand their world
+- Include one calibrated "How" or "What" question
+- End with a no-oriented question if appropriate ("Have you given up on...?")
+- Use softeners: "I'm afraid...", "I'm sorry if this is off-base..."
+- Under 80 words. Empathy is efficient.
 
-Subject line options:
-- "Have you given up on [project/goal]?"
-- "Is [solution type] no longer a priority?"
-- "Have I lost you?"
+Tone: Empathetic but strategic. Curious. Never pushy.`;
 
-The email should make them feel understood, not chased.`,
-  },
-  {
-    id: 'voss-discovery',
-    title: 'Tactical Empathy Discovery Prompt',
-    description: 'Uncover real emotional drivers with FBI techniques',
-    prompt: `Generate discovery questions using Chris Voss negotiation psychology.
+const discoveryCallPrompt = `Generate Chris Voss-style discovery questions.
 
 Context:
-- Prospect: [NAME, TITLE at COMPANY]
-- Industry: [THEIR INDUSTRY]
-- What I'm selling: [YOUR PRODUCT]
-- Known situation: [WHAT YOU KNOW]
+- Prospect company: [COMPANY]
+- Their likely pain point: [PROBLEM AREA]
+- My solution: [WHAT YOU OFFER]
 
-Chris Voss Discovery Techniques:
+Chris Voss Approach to Discovery:
+- Use labeling to surface emotions: "It seems like...", "It sounds like..."
+- Calibrated questions start with "How" or "What" (never "Why")
+- Mirror their last 3 words to encourage elaboration
+- Use no-oriented questions to create safety
+- Tactical silence after questions—let them fill the space
 
-1. LABELS (statements that identify emotions):
-- "It seems like..."
-- "It sounds like..."
-- "It looks like..."
+Generate 6 questions/techniques:
+1. An opening label to build rapport
+2. A calibrated "How" question
+3. A calibrated "What" question
+4. A mirroring opportunity (with example response)
+5. A no-oriented question to surface concerns
+6. A summary label to confirm understanding`;
 
-2. MIRRORS (repeat last 1-3 words as a question):
-- Them: "We've been struggling with this for months."
-- You: "For months?"
+const objectionPrompt = `Handle this objection in the Chris Voss tonality.
 
-3. CALIBRATED QUESTIONS (How/What questions):
-- "How does this affect your team?"
-- "What happens if this doesn't get solved?"
-- "How would you like me to proceed?"
-
-4. NO-ORIENTED QUESTIONS:
-- "Would it be ridiculous to think that..."
-- "Is it a bad idea to..."
-- "Have you given up on..."
-
-Generate a discovery call script with:
-- 3 opening labels
-- 5 calibrated questions (How/What)
-- 2 no-oriented questions
-- Instructions on when to mirror
-
-The goal is to make them feel deeply understood while uncovering their real pain.`,
-  },
-  {
-    id: 'voss-objection',
-    title: 'Objection Handling with Labels',
-    description: 'Defuse objections using tactical empathy',
-    prompt: `Help me respond to this objection using Chris Voss techniques:
-
-Objection: "[THE OBJECTION THEY RAISED]"
+The objection: [PASTE OBJECTION HERE]
 
 Context:
-- My product: [WHAT I'M SELLING]
-- Their company: [COMPANY NAME]
-- Relationship status: [WARM/COLD/NEGOTIATING]
+- My product: [WHAT YOU SELL]
+- The outcome we deliver: [KEY BENEFIT]
 
-Chris Voss Objection Framework:
+Chris Voss Response Framework:
+1. Label the emotion behind the objection: "It sounds like..."
+2. Use a calibrated question to understand deeper
+3. Mirror if they give a short response
+4. Summarize their concerns to get a "That's right"
+5. Only then offer perspective—and frame it as their idea
+6. End with a how/what question that moves forward
 
-1. LABEL THE EMOTION (don't argue):
-- "It sounds like you're concerned about..."
-- "It seems like [X] is really important to you..."
+Generate a response that makes them feel heard before moving forward.`;
 
-2. PAUSE (let the label land - count to 4)
-
-3. ASK A CALIBRATED QUESTION:
-- "How would you like me to address that?"
-- "What would need to change for this to work?"
-
-4. USE STRATEGIC NO:
-- "Would it be horrible if we..."
-- "Is it a crazy idea to..."
-
-5. ACCUSATION AUDIT (get ahead of negatives):
-- "You're probably thinking..."
-- "You might feel like..."
-
-Generate a response that:
-- Opens with a label
-- Includes an accusation audit
-- Asks a calibrated question
-- Never argues or gets defensive
-- Makes them feel heard, not sold`,
-  },
-  {
-    id: 'voss-negotiation',
-    title: 'Price Negotiation Prompt',
-    description: 'Handle pricing conversations with Voss psychology',
-    prompt: `Help me navigate this pricing conversation using Chris Voss techniques.
+const linkedinPrompt = `Write a LinkedIn message in the Chris Voss tonality.
 
 Context:
-- My price: [YOUR PRICE]
-- Their budget: [WHAT THEY SAID / YOUR ASSUMPTION]
-- What they've said: "[THEIR EXACT WORDS ABOUT PRICE]"
-- My flexibility: [WHAT YOU CAN/CAN'T MOVE ON]
-
-Chris Voss Pricing Techniques:
-
-1. THE LATE-NIGHT FM DJ VOICE:
-- Slow down. Lower your voice. Be calm.
-- Confidence comes from tone, not words.
-
-2. CALIBRATED QUESTIONS:
-- "How am I supposed to do that?"
-- "What are we trying to accomplish here?"
-- "How does this fit with your budget constraints?"
-
-3. THE ACCUSATION AUDIT:
-- "You're probably thinking we're too expensive..."
-- "I know it seems like a big number..."
-
-4. ANCHORING WITH "NO":
-- "Is $[higher price] out of the question?"
-- "Would it be impossible to do $[your price]?"
-
-5. NON-ROUND NUMBERS:
-- $47,850 feels more calculated than $48,000
-
-Generate:
-1. An accusation audit about price
-2. 3 calibrated questions to understand their constraints
-3. A reframe that focuses on value, not price
-4. A "no-oriented" anchor
-
-Never justify. Never defend. Make them explain their constraints.`,
-  },
-  {
-    id: 'voss-linkedin',
-    title: 'LinkedIn with No-Oriented Questions',
-    description: 'LinkedIn outreach using Voss techniques',
-    prompt: `Write a LinkedIn message using Chris Voss techniques.
-
-Context:
-- Target: [NAME, TITLE at COMPANY]
-- Why I'm reaching out: [SPECIFIC REASON]
-- What I offer: [MY VALUE PROP]
+- Recipient: [NAME], [TITLE]
+- Their likely frustration: [PAIN POINT]
+- What I want: [Meeting, intro, feedback, etc.]
 
 Chris Voss LinkedIn Rules:
-- Use a no-oriented question
-- Open with a label or mirror
-- Keep it very short (under 40 words)
-- Make it easy to say no (which paradoxically gets more yeses)
-- No pitch - just open a conversation
+- Open with a label: "It seems like you're dealing with..."
+- Show you've thought about their challenges
+- Ask a calibrated question, not a direct pitch
+- Use a softener: "I might be completely off-base, but..."
+- End with a no-oriented question if re-engaging cold
+- Under 50 words. Empathy doesn't ramble.`;
 
-Examples of no-oriented openers:
-- "Would it be ridiculous to think..."
-- "Is it a bad idea to ask about..."
-- "Have you completely ruled out..."
+const reengagementPrompt = `Write a re-engagement email in the Chris Voss tonality.
 
-The message should feel like you're giving them an easy out, which makes them more likely to engage.`,
-  },
-];
+Context:
+- Prospect: [NAME] at [COMPANY]
+- Last interaction: [WHAT HAPPENED / HOW LONG AGO]
+- What I want: [NEXT STEP]
+
+Chris Voss Re-engagement Framework:
+- Subject line: "Have you given up on [PROJECT/GOAL]?"
+- This gets 80%+ response rates because "No" is easier than "Yes"
+- Acknowledge the silence without guilt-tripping
+- Use a label to surface what might be happening
+- Make it easy for them to say "No, we haven't given up"
+- Offer a low-pressure next step
+
+Generate a re-engagement email that makes "no" the path forward.`;
+
+const exampleOutput = `Subject: Have you given up on this?
+
+James —
+
+It seems like scaling outbound while keeping quality high has been a struggle. I might be completely off-base here.
+
+A few months back you mentioned wanting to 3x pipeline without adding headcount. I'm guessing priorities shifted—or maybe the timing just wasn't right.
+
+Have you given up on solving this for Q2?
+
+Either way, no pressure. Just wanted to check.
+
+— Rachel`;
+
+const realExample = `"Have you given up on this project?"
+
+This subject line gets 80%+ response rates. Why? Because answering "No" is psychologically easier than saying "Yes."
+
+The prospect responds to defend themselves: "No, we haven't given up, we've just been busy..." And now you have a conversation.`;
 
 const relatedTonalities = [
   { slug: 'steve-jobs', name: 'Steve Jobs', tagline: 'Brutally Direct' },
-  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer Obsessed' },
+  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer-Obsessed' },
   { slug: 'hemingway', name: 'Hemingway', tagline: 'Radically Brief' },
   { slug: 'cormac-mccarthy', name: 'Cormac McCarthy', tagline: 'Sparse & Powerful' },
 ];
 
-export default function ChrisVossPage() {
+export default function ChrisVossTonalityPage() {
   return (
-    <div className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-          <Link href="/free-tools" className="hover:text-foreground transition-colors">
-            Free Tools
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/free-tools/tonalities" className="hover:text-foreground transition-colors">
-            Tonalities
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-foreground">Chris Voss</span>
-        </div>
+    <div className="min-h-screen bg-background">
+      <Header />
 
+      <main className="max-w-4xl mx-auto px-6 py-16">
         {/* Hero */}
-        <div className="mb-12">
-          <Badge variant="outline" className="mb-4 border-blue-500/30 text-blue-400">
-            Tonality
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Tactical Empathy
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            The Chris Voss approach: FBI negotiation techniques adapted for B2B sales.
+        <div className="text-center mb-12">
+          <Badge variant="accent" className="mb-4">GTM Tonality</Badge>
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600 dark:text-orange-400">
+              <MessageSquare className="h-6 w-6" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Chris Voss
+            </h1>
+          </div>
+          <p className="text-xl text-orange-600 dark:text-orange-400 font-medium mb-4">
+            Tactical Empathy. Calibrated Questions. Psychology-Driven.
           </p>
-          <blockquote className="border-l-4 border-blue-500 pl-4 italic text-zinc-400">
-            "Have you given up on this project?"
-            <cite className="block text-sm mt-2 not-italic">— Subject line with 80%+ response rate</cite>
-          </blockquote>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Based on FBI hostage negotiation techniques from "Never Split the Difference."
+            Label emotions. Ask calibrated questions. Make "no" work for you.
+          </p>
         </div>
 
-        {/* Philosophy */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">The Philosophy</h2>
-          <div className="prose prose-invert max-w-none">
-            <p className="text-muted-foreground">
-              Chris Voss spent 24 years as an FBI hostage negotiator before teaching these techniques to
-              salespeople. His approach from "Never Split the Difference" is built on tactical empathy -
-              understanding someone's perspective without necessarily agreeing with it.
-            </p>
-            <p className="text-muted-foreground mt-4">
-              The key insight: people need to feel understood before they'll listen. Labels, mirrors,
-              and calibrated questions make prospects feel heard. No-oriented questions ("Have you given up...")
-              give them permission to say no, which paradoxically makes them more likely to say yes.
-            </p>
-          </div>
-
-          <div className="mt-6">
-            <h3 className="font-semibold mb-3">Key Techniques</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400">•</span>
-                <strong>Labels:</strong> "It seems like..." / "It sounds like..."
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400">•</span>
-                <strong>Calibrated Questions:</strong> "How" and "What" questions that can't be answered with yes/no
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400">•</span>
-                <strong>No-Oriented Questions:</strong> "Have you given up on..." / "Is it ridiculous to think..."
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400">•</span>
-                <strong>Mirroring:</strong> Repeat the last 1-3 words as a question
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-400">•</span>
-                <strong>Accusation Audit:</strong> Get ahead of negatives they might be thinking
-              </li>
-            </ul>
-          </div>
-
-          <div className="mt-6 grid md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-              <h4 className="font-semibold text-green-400 mb-2">When to Use</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Negotiating price or terms</li>
-                <li>• Handling objections</li>
-                <li>• Re-engaging cold leads</li>
-                <li>• Discovery calls</li>
-                <li>• Guarded or skeptical prospects</li>
-              </ul>
-            </div>
-            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
-              <h4 className="font-semibold text-red-400 mb-2">When NOT to Use</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Simple transactional requests</li>
-                <li>• When you need to be direct/urgent</li>
-                <li>• Technical product discussions</li>
-                <li>• When overused (feels manipulative)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Prompts */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Copy-Paste Prompts</h2>
-          <div className="space-y-6">
-            {prompts.map((prompt) => (
-              <div
-                key={prompt.id}
-                className="p-6 rounded-xl border border-border bg-card"
-              >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{prompt.title}</h3>
-                    <p className="text-sm text-muted-foreground">{prompt.description}</p>
-                  </div>
-                  <CopyButton text={prompt.prompt} />
-                </div>
-                <div className="bg-zinc-900 rounded-lg p-4 font-mono text-sm">
-                  <pre className="text-zinc-300 whitespace-pre-wrap overflow-x-auto">
-                    {prompt.prompt}
-                  </pre>
-                </div>
-              </div>
+        {/* Real Example Quote */}
+        <div className="bg-zinc-950 rounded-xl p-6 mb-12 border-l-4 border-orange-500">
+          <div className="text-zinc-300 space-y-4">
+            <p className="text-lg font-medium italic">"{realExample.split('\n\n')[0].replace(/"/g, '')}"</p>
+            {realExample.split('\n\n').slice(1).map((para, i) => (
+              <p key={i} className="text-zinc-400">{para}</p>
             ))}
+          </div>
+        </div>
+
+        {/* The Philosophy */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-foreground mb-6">The Philosophy</h2>
+          <div className="prose prose-zinc dark:prose-invert max-w-none">
+            <p>
+              Voss learned negotiation in life-or-death situations. When hostages are at stake,
+              you don't have time for rapport-building small talk. You need <strong>tactical empathy</strong>—the
+              ability to understand and articulate someone's perspective to build trust fast.
+            </p>
+            <p>
+              In sales, this translates to making prospects feel deeply understood before you ever pitch.
+              When someone feels heard, their defenses drop. The negotiation becomes collaboration.
+            </p>
+          </div>
+
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">Key Techniques</h3>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Labeling.</strong> "It seems like...", "It sounds like...", "It looks like..." Name their emotion.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Calibrated questions.</strong> Start with "How" or "What"—never "Why" (feels accusatory).</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">No-oriented questions.</strong> "Have you given up on...?" Gets 80%+ response rates.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Mirroring.</strong> Repeat the last 1-3 words as a question. They'll elaborate.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Softeners.</strong> "I'm afraid...", "I'm sorry if this is off-base..." Lowers defenses.</span>
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">When to Use</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
+              <h4 className="font-medium text-green-600 dark:text-green-400 mb-2">Best For</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Negotiating price, terms, or scope</li>
+                <li>• Handling objections and concerns</li>
+                <li>• Re-engaging cold or ghosted leads</li>
+                <li>• Discovery calls to uncover real drivers</li>
+                <li>• Building rapport with skeptical prospects</li>
+              </ul>
+            </div>
+            <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/20">
+              <h4 className="font-medium text-red-600 dark:text-red-400 mb-2">Avoid When</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Prospect wants direct, no-nonsense communication</li>
+                <li>• Technical buyers who just want specs</li>
+                <li>• Time-pressured situations needing fast answers</li>
+                <li>• Overused—can feel manipulative if forced</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Prompts Section */}
+        <div className="space-y-8 mb-12">
+          <h2 className="text-2xl font-bold text-foreground">The Prompts</h2>
+
+          {/* Cold Email */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Cold Email</h3>
+              <CopyButton text={coldEmailPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{coldEmailPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Discovery Call */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Discovery Call Questions</h3>
+              <CopyButton text={discoveryCallPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{discoveryCallPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Objection Handling */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Objection Handling</h3>
+              <CopyButton text={objectionPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{objectionPrompt}</pre>
+            </div>
+          </div>
+
+          {/* LinkedIn Message */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">LinkedIn Message</h3>
+              <CopyButton text={linkedinPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{linkedinPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Re-engagement */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Re-engagement Email</h3>
+              <CopyButton text={reengagementPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{reengagementPrompt}</pre>
+            </div>
           </div>
         </div>
 
         {/* Example Output */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Example Output</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/20">
-              <h4 className="font-semibold text-red-400 mb-2 text-sm">Before (Generic Follow-up)</h4>
-              <p className="text-sm text-muted-foreground">
-                Subject: Following up<br/><br/>
-                "Hi Sarah, just wanted to follow up on my last email. Did you have a chance to review our proposal?
-                Let me know if you have any questions. Looking forward to hearing from you!"
-              </p>
-            </div>
-            <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
-              <h4 className="font-semibold text-green-400 mb-2 text-sm">After (Voss Style)</h4>
-              <p className="text-sm text-muted-foreground">
-                Subject: Have you given up on this?<br/><br/>
-                "Sarah - It seems like the timing might not be right for this project.
-                I'm afraid I may have missed something important about your situation.
-                What would need to change for this to make sense?"
-              </p>
-            </div>
+          <h2 className="text-2xl font-bold text-foreground mb-6">Example Output</h2>
+          <div className="bg-card border border-border rounded-xl p-6">
+            <pre className="text-sm text-foreground whitespace-pre-wrap">{exampleOutput}</pre>
           </div>
         </div>
 
         {/* Related Tonalities */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Other Tonalities</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {relatedTonalities.map((tonality) => (
+          <h2 className="text-2xl font-bold text-foreground mb-6">Other Tonalities</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {relatedTonalities.map((t) => (
               <Link
-                key={tonality.slug}
-                href={`/free-tools/tonalities/${tonality.slug}`}
-                className="group p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors flex items-center justify-between"
+                key={t.slug}
+                href={`/free-tools/tonalities/${t.slug}`}
+                className="p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors text-center"
               >
-                <div>
-                  <h3 className="font-semibold group-hover:text-orange-400 transition-colors">
-                    {tonality.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{tonality.tagline}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
+                <p className="font-medium text-foreground">{t.name}</p>
+                <p className="text-sm text-orange-600 dark:text-orange-400">{t.tagline}</p>
               </Link>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center p-8 rounded-xl bg-zinc-900">
+        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
-            Let Prospeda Negotiate For You
+            Let Prospeda write in the Voss tonality for you
           </h2>
-          <p className="text-zinc-400 mb-6 max-w-xl mx-auto">
-            Prospeda automatically applies Chris Voss techniques when re-engaging cold leads,
-            handling objections, or navigating price conversations.
+          <p className="text-orange-100 mb-6 max-w-xl mx-auto">
+            AI research + human review. 50-100 qualified leads monthly in your voice.
           </p>
-          <a href="https://prospeda.com" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
-              Try Prospeda Free
+          <a href="https://buy.stripe.com/6oU5kD0VN5BLggqeS193y01">
+            <Button size="lg" className="bg-white text-teal-700 hover:bg-zinc-100">
+              Get Started — $2,500/mo
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
         </div>
-      </div>
+      </main>
+
+      <footer className="border-t border-border mt-16">
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-muted-foreground text-sm">© {new Date().getFullYear()} Prospeda</div>
+          <div className="flex gap-6 text-sm">
+            <Link href="/free-tools/tonalities" className="text-muted-foreground hover:text-foreground">All Tonalities</Link>
+            <Link href="/free-tools" className="text-muted-foreground hover:text-foreground">Free Tools</Link>
+            <a href="https://github.com/Prospeda/claude-gtm-skills" className="text-muted-foreground hover:text-foreground">GitHub</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

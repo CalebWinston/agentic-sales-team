@@ -1,361 +1,348 @@
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/copy-button';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, Flame } from 'lucide-react';
 import type { Metadata } from 'next';
+import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Cormac McCarthy Tonality | Powerful, Visceral Sales Writing',
-  description: 'Write like Cormac McCarthy. Sparse punctuation, biblical cadence, stark imagery. Copy-paste prompts for transformational deals.',
+  title: 'Cormac McCarthy Tonality | Powerful Sales Writing | Free GTM Prompts',
+  description: 'Write like Cormac McCarthy. Sparse, powerful, biblical cadence. Copy these Claude/ChatGPT prompts for transformational deals and visionary founders.',
+  keywords: 'powerful sales writing, visceral copywriting, literary sales techniques, biblical cadence business writing, cormac mccarthy style',
   openGraph: {
-    title: 'The Cormac McCarthy Approach to Sales Communication',
-    description: 'Sparse, powerful, poetic. Biblical cadence and stark imagery for unforgettable sales messaging.',
+    title: 'Cormac McCarthy Tonality | Powerful Sales Writing',
+    description: 'Write like Cormac McCarthy. Sparse, powerful, biblical cadence. Free prompts for Claude & ChatGPT.',
+    type: 'website',
   },
 };
 
-const prompts = [
-  {
-    id: 'mccarthy-cold-email',
-    title: 'Cold Email Prompt',
-    description: 'Write a cold email with McCarthy gravitas',
-    prompt: `Write a cold email in the Cormac McCarthy style.
+const coldEmailPrompt = `Write a cold email in the Cormac McCarthy tonality.
 
 Context:
-- Recipient: [NAME, TITLE at COMPANY]
-- Their market situation: [WHAT'S HAPPENING IN THEIR INDUSTRY]
-- The transformation I offer: [WHAT CHANGES WITH MY PRODUCT]
-- Why now matters: [THE URGENCY]
+- Prospect: [NAME], [TITLE] at [COMPANY]
+- The market shift: [WHAT'S CHANGING IN THEIR INDUSTRY]
+- My product: [What you sell]
+- The transformation: [WHAT CHANGES WHEN THEY USE YOU]
 
-Cormac McCarthy Rules:
+Cormac McCarthy Style Rules:
 - Sparse punctuation. No quotation marks. Minimal commas.
-- Polysyndeton: Use "and" to connect long clauses (builds rhythm)
-- Stark, concrete imagery: blood, bone, steel, data, capital, dust
-- Biblical rhythm and cadence
-- Frame as inevitable truth, not opinion
-- Present tense for immediacy
-- No corporate jargon - only elemental words
+- Use polysyndeton: connect ideas with "and" to create rhythm.
+- Stark, concrete imagery: blood, bone, steel, data, capital.
+- Biblical rhythm and cadence. Inevitable. Prophetic.
+- Frame as truth, not opinion. This is what's coming.
+- The old world is dying. Name what's dying.
+- Short paragraphs. White space as punctuation.
+- Under 80 words. Density creates gravity.
 
-Tone: Prophetic. Like you're describing something that has already happened in the future.
+Tone: Prophetic. Inevitable. Unforgettable.`;
 
-The email should feel like it was carved in stone. Like the words themselves carry weight.
-It should make them stop scrolling. Make them feel something.
-
-This is for high-stakes, transformational positioning. Not everyday outreach.`,
-  },
-  {
-    id: 'mccarthy-market-shift',
-    title: 'Market Disruption Narrative',
-    description: 'Frame market change with McCarthy inevitability',
-    prompt: `Write a market disruption narrative in the Cormac McCarthy style.
+const discoveryCallPrompt = `Generate Cormac McCarthy-style discovery questions.
 
 Context:
-- The old way: [HOW THINGS USED TO BE DONE]
-- What changed: [THE DISRUPTION/SHIFT]
-- The new reality: [HOW THINGS WORK NOW]
-- Those who adapted: [SUCCESS EXAMPLES]
-- Those who didn't: [FAILURE EXAMPLES]
-- Where my product fits: [YOUR ROLE IN THIS]
+- Prospect company: [COMPANY]
+- The change coming to their market: [DISRUPTION]
+- My solution: [WHAT YOU OFFER]
 
-Cormac McCarthy Market Narrative Rules:
-- The old way is dead. State it as fact.
-- Use "And" at the start of sentences for biblical cadence
-- Concrete imagery: maps that no longer match the territory, gates, darkness, light
-- The competitors are not "competition" - they are at the gates
-- Frame your product as the inevitable choice, not a sales pitch
-- No hedge words. No "might" or "could" or "potentially"
+Cormac McCarthy Approach to Discovery:
+- Questions that feel like prophecy
+- Frame their situation as a turning point in history
+- Use stark imagery to describe their current state
+- Make the question feel inevitable, not optional
+- Let silence hang after each question
 
-Structure:
-1. The world that was (past tense, brief)
-2. The turn (present tense, the moment of change)
-3. The new landscape (present tense, stark description)
-4. The choice (what they must decide)
+Generate 5 questions that:
+1. Name what's dying in their industry
+2. Ask about the world they're trying to build
+3. Surface the cost of staying still
+4. Frame the choice as binary: transform or fade
+5. Use concrete imagery (markets, competitors, time)`;
 
-This is for visionary founders and CEOs who respond to big-picture thinking.`,
-  },
-  {
-    id: 'mccarthy-objection',
-    title: 'Objection Response Prompt',
-    description: 'Handle objections with McCarthy weight',
-    prompt: `Help me respond to this objection in Cormac McCarthy style:
+const objectionPrompt = `Handle this objection in the Cormac McCarthy tonality.
 
-Objection: "[THE OBJECTION THEY RAISED]"
+The objection: [PASTE OBJECTION HERE]
 
 Context:
-- My product: [WHAT I'M SELLING]
-- Their company: [COMPANY NAME]
-- The deeper truth: [WHAT THEY'RE REALLY AFRAID OF]
+- My product: [WHAT YOU SELL]
+- The transformation we enable: [KEY CHANGE]
 
-Cormac McCarthy Objection Rules:
-- Don't argue with the objection. Transcend it.
-- Name the fear underneath the objection
-- Use elemental language: time, change, survival, choice
-- Frame the decision as inevitable, not optional
-- Short paragraphs. Let silence do the work.
-- No defense. No apology. Only truth.
+Cormac McCarthy Response Framework:
+- Acknowledge what they said. Do not argue.
+- Reframe the objection as part of a larger truth.
+- Name what's coming whether they act or not.
+- Use stark imagery. Markets shift. Companies fall.
+- End with a statement of what is, not what could be.
+- This isn't persuasion. It's witness.
 
-The response should make the objection feel small compared to the larger forces at play.
-It should reframe the conversation from "should we buy" to "can we afford not to."
+Generate a response that feels like prophecy, not pitch.`;
 
-Use sparingly. This is for high-stakes moments with visionary buyers.`,
-  },
-  {
-    id: 'mccarthy-vision',
-    title: 'Vision Statement Prompt',
-    description: 'Articulate a vision with McCarthy power',
-    prompt: `Write a vision statement in the Cormac McCarthy style.
+const linkedinPrompt = `Write a LinkedIn message in the Cormac McCarthy tonality.
 
 Context:
-- Company/Product: [YOUR COMPANY OR PRODUCT]
-- The problem you're solving: [THE CORE ISSUE]
-- The world you're building: [THE VISION]
-- Who benefits: [YOUR CUSTOMERS]
-- What you believe: [YOUR CORE CONVICTION]
-
-Cormac McCarthy Vision Rules:
-- No mission statement language. No "leverage" or "synergy" or "empower"
-- Elemental words only: build, break, rise, fall, forge, hold
-- Biblical structure: And... And... And...
-- The vision is not aspirational - state it as if it's already true
-- Stark imagery of before and after
-- No "we believe" - just state the truth
-- End with an image, not a statement
-
-The vision should feel like prophecy. Like you're describing something you've already seen.
-
-This is for company founding documents, major fundraising, or transformational positioning.`,
-  },
-  {
-    id: 'mccarthy-linkedin',
-    title: 'LinkedIn Post Prompt',
-    description: 'Write a LinkedIn post with McCarthy weight',
-    prompt: `Write a LinkedIn post in the Cormac McCarthy style.
-
-Context:
-- Topic: [WHAT YOU WANT TO SAY]
-- Your experience: [RELEVANT BACKGROUND]
-- The insight: [THE CORE TRUTH]
-- Who should care: [YOUR AUDIENCE]
+- Recipient: [NAME], [TITLE]
+- The change in their world: [WHAT'S SHIFTING]
+- What I want: [Meeting, intro, feedback, etc.]
 
 Cormac McCarthy LinkedIn Rules:
-- No hashtags. No emojis. No "Agree?" at the end.
-- Short paragraphs. One sentence each is fine.
-- Polysyndeton for rhythm (And... And... And...)
-- Concrete imagery from your industry
-- Frame observations as eternal truths, not hot takes
-- No calls to action. The post itself is the action.
+- No greeting. Begin with truth.
+- One sentence about what's ending.
+- One sentence about what's beginning.
+- One question or statement about their role in it.
+- Under 40 words. Weight, not length.`;
 
-The post should stand alone. It should feel like it could have been written a hundred years ago
-and will still be true a hundred years from now.
+const narrativePrompt = `Write a market disruption narrative in the Cormac McCarthy tonality.
 
-This style works best for posts about:
-- Industry shifts and change
-- Hard truths about your field
-- Moments of clarity or insight
-- The nature of work, building, or selling`,
-  },
-];
+Context:
+- Industry: [THE MARKET]
+- The old way: [WHAT'S DYING]
+- The new way: [WHAT'S EMERGING]
+- Our role: [HOW WE FIT IN]
+
+Cormac McCarthy Narrative Rules:
+- Start in medias res. The change has already begun.
+- Name the old world without nostalgia.
+- Name the new world without hype.
+- Use polysyndeton for rhythm: "And the markets shifted and the old ways fell..."
+- Concrete images: maps that no longer match the terrain.
+- Position your company as witness and guide, not savior.
+- 100-150 words. Epic compression.
+
+Tone: Biblical. Inevitable. True.`;
+
+const exampleOutput = `Subject: The maps dont match the terrain
+
+Sarah —
+
+The market turned. You know this.
+
+And the old playbooks and the consultants and the software that promised scale are promises of a world that was. Your competitors move faster now. They learned what you have not.
+
+We work with founders who see the turn. Who know the maps they were given are maps of a place that no longer exists.
+
+There is a call this week. Wednesday. You come or you dont.
+
+— Marcus`;
+
+const realExample = `And the market had turned. And the old ways were no longer true. The maps they had were maps of a world that was gone and the competitors were at the gates and there was a darkness on the horizon.
+
+This style is unforgettable because it treats business as what it is: survival. Life and death of companies. The rise and fall of empires.`;
 
 const relatedTonalities = [
   { slug: 'steve-jobs', name: 'Steve Jobs', tagline: 'Brutally Direct' },
-  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer Obsessed' },
+  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer-Obsessed' },
   { slug: 'chris-voss', name: 'Chris Voss', tagline: 'Tactical Empathy' },
   { slug: 'hemingway', name: 'Hemingway', tagline: 'Radically Brief' },
 ];
 
-export default function CormacMcCarthyPage() {
+export default function CormacMcCarthyTonalityPage() {
   return (
-    <div className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-          <Link href="/free-tools" className="hover:text-foreground transition-colors">
-            Free Tools
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/free-tools/tonalities" className="hover:text-foreground transition-colors">
-            Tonalities
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-foreground">Cormac McCarthy</span>
-        </div>
+    <div className="min-h-screen bg-background">
+      <Header />
 
+      <main className="max-w-4xl mx-auto px-6 py-16">
         {/* Hero */}
-        <div className="mb-12">
-          <Badge variant="outline" className="mb-4 border-red-500/30 text-red-400">
-            Tonality
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Sparse & Powerful
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            The Cormac McCarthy approach: Biblical cadence, stark imagery, inevitable truth.
+        <div className="text-center mb-12">
+          <Badge variant="accent" className="mb-4">GTM Tonality</Badge>
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600 dark:text-orange-400">
+              <Flame className="h-6 w-6" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Cormac McCarthy
+            </h1>
+          </div>
+          <p className="text-xl text-orange-600 dark:text-orange-400 font-medium mb-4">
+            Sparse. Powerful. Biblical Cadence.
           </p>
-          <blockquote className="border-l-4 border-red-500 pl-4 text-zinc-400">
-            <p className="italic">
-              And the market had turned. And the old ways were no longer true. The maps they had were maps
-              of a world that was gone and the competitors were at the gates and there was a darkness on the horizon.
-            </p>
-          </blockquote>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Based on the novelist's distinctive prose style. Polysyndeton rhythm. Stark imagery.
+            Frame as inevitable truth. Unforgettable.
+          </p>
         </div>
 
-        {/* Philosophy */}
+        {/* Real Example Quote */}
+        <div className="bg-zinc-950 rounded-xl p-6 mb-12 border-l-4 border-orange-500">
+          <div className="text-zinc-300 space-y-4">
+            <p className="italic">{realExample.split('\n\n')[0]}</p>
+            <p className="text-zinc-500">{realExample.split('\n\n')[1]}</p>
+          </div>
+        </div>
+
+        {/* The Philosophy */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">The Philosophy</h2>
-          <div className="prose prose-invert max-w-none">
-            <p className="text-muted-foreground">
-              Cormac McCarthy wrote novels that feel like the Old Testament set in the American West.
-              No quotation marks. Minimal punctuation. Sentences connected by "and" that build like waves.
-              His prose doesn't argue or persuade - it states truth with such weight that argument feels pointless.
+          <h2 className="text-2xl font-bold text-foreground mb-6">The Philosophy</h2>
+          <div className="prose prose-zinc dark:prose-invert max-w-none">
+            <p>
+              McCarthy writes about violence and survival and the indifference of the world to human
+              plans. His prose has the weight of scripture because he treats his subjects as <strong>matters
+              of life and death</strong>. Because they are.
             </p>
-            <p className="text-muted-foreground mt-4">
-              In sales, this style is nuclear. Use it rarely. When you need to be remembered. When the deal
-              is transformational. When you're speaking to a visionary CEO who thinks in decades, not quarters.
-              This tonality frames your product not as a purchase decision, but as an inevitable force.
+            <p>
+              In business, this tonality works for moments of transformation. When markets shift.
+              When the old ways die. When a founder must decide whether to adapt or fade into
+              irrelevance. These are not small moments. They deserve language that matches their weight.
             </p>
           </div>
 
-          <div className="mt-6">
-            <h3 className="font-semibold mb-3">Key Characteristics</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-red-400">•</span>
-                Sparse punctuation. No quotation marks. Minimal commas.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-400">•</span>
-                Polysyndeton: "And... and... and..." builds biblical rhythm
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-400">•</span>
-                Stark, concrete imagery: blood, bone, steel, data, capital
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-400">•</span>
-                Biblical cadence and prophetic tone
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-400">•</span>
-                Framing as inevitable truth, not opinion or pitch
-              </li>
-            </ul>
-          </div>
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">Key Characteristics</h3>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Sparse punctuation.</strong> No quotation marks. Minimal commas. Let rhythm guide.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Polysyndeton.</strong> "And the market shifted and the old ways fell and the new order rose."</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Stark imagery.</strong> Blood, bone, steel, data, capital. Concrete, visceral words.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Biblical rhythm.</strong> The cadence of inevitability. Truth, not opinion.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">The dying world.</strong> Always name what's ending. Maps that no longer match terrain.</span>
+            </li>
+          </ul>
 
-          <div className="mt-6 grid md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-              <h4 className="font-semibold text-green-400 mb-2">When to Use</h4>
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">When to Use</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
+              <h4 className="font-medium text-green-600 dark:text-green-400 mb-2">Best For</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• High-stakes transformational deals</li>
+                <li>• High-stakes, transformational deals</li>
                 <li>• Market disruption narratives</li>
-                <li>• Visionary founders/CEOs</li>
+                <li>• Communicating with visionary founders/CEOs</li>
                 <li>• When you need to be remembered</li>
-                <li>• Company vision statements</li>
               </ul>
             </div>
-            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
-              <h4 className="font-semibold text-red-400 mb-2">When NOT to Use</h4>
+            <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/20">
+              <h4 className="font-medium text-red-600 dark:text-red-400 mb-2">Avoid When</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Everyday sales communication</li>
-                <li>• Technical product discussions</li>
-                <li>• Risk-averse or conservative buyers</li>
-                <li>• When clarity trumps style</li>
-                <li>• Frequently (loses power if overused)</li>
+                <li>• Routine transactions or small deals</li>
+                <li>• Technical buyers who want specs, not poetry</li>
+                <li>• Risk-averse corporate environments</li>
+                <li>• Prospects who don't see themselves as visionaries</li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Prompts */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Copy-Paste Prompts</h2>
-          <div className="space-y-6">
-            {prompts.map((prompt) => (
-              <div
-                key={prompt.id}
-                className="p-6 rounded-xl border border-border bg-card"
-              >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{prompt.title}</h3>
-                    <p className="text-sm text-muted-foreground">{prompt.description}</p>
-                  </div>
-                  <CopyButton text={prompt.prompt} />
-                </div>
-                <div className="bg-zinc-900 rounded-lg p-4 font-mono text-sm">
-                  <pre className="text-zinc-300 whitespace-pre-wrap overflow-x-auto">
-                    {prompt.prompt}
-                  </pre>
-                </div>
-              </div>
-            ))}
+        {/* Prompts Section */}
+        <div className="space-y-8 mb-12">
+          <h2 className="text-2xl font-bold text-foreground">The Prompts</h2>
+
+          {/* Cold Email */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Cold Email</h3>
+              <CopyButton text={coldEmailPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{coldEmailPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Discovery Call */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Discovery Call Questions</h3>
+              <CopyButton text={discoveryCallPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{discoveryCallPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Objection Handling */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Objection Handling</h3>
+              <CopyButton text={objectionPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{objectionPrompt}</pre>
+            </div>
+          </div>
+
+          {/* LinkedIn Message */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">LinkedIn Message</h3>
+              <CopyButton text={linkedinPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{linkedinPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Market Disruption Narrative */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Market Disruption Narrative</h3>
+              <CopyButton text={narrativePrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{narrativePrompt}</pre>
+            </div>
           </div>
         </div>
 
         {/* Example Output */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Example Output</h2>
-          <div className="p-6 rounded-lg bg-zinc-900 border border-zinc-800">
-            <h4 className="font-semibold text-red-400 mb-4 text-sm">Market Shift Narrative (McCarthy Style)</h4>
-            <div className="text-zinc-300 leading-relaxed space-y-4">
-              <p>
-                There was a time when sales teams built pipeline with volume. More calls. More emails. More bodies.
-                And the metrics looked good on dashboards and the quotas were met and no one asked what happened
-                to the leads that went dark.
-              </p>
-              <p>
-                That time has passed.
-              </p>
-              <p>
-                And now the buyers have grown wise and the inboxes overflow and the connect rates fall like winter light.
-                And the companies that still play the volume game find themselves shouting into a void where no one listens
-                and no one responds and the pipeline that once flowed runs dry.
-              </p>
-              <p>
-                The tools have changed. The game has changed. And those who do not change with it will find themselves
-                holding maps of a world that no longer exists.
-              </p>
-            </div>
+          <h2 className="text-2xl font-bold text-foreground mb-6">Example Output</h2>
+          <div className="bg-card border border-border rounded-xl p-6">
+            <pre className="text-sm text-foreground whitespace-pre-wrap">{exampleOutput}</pre>
           </div>
         </div>
 
         {/* Related Tonalities */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Other Tonalities</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {relatedTonalities.map((tonality) => (
+          <h2 className="text-2xl font-bold text-foreground mb-6">Other Tonalities</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {relatedTonalities.map((t) => (
               <Link
-                key={tonality.slug}
-                href={`/free-tools/tonalities/${tonality.slug}`}
-                className="group p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors flex items-center justify-between"
+                key={t.slug}
+                href={`/free-tools/tonalities/${t.slug}`}
+                className="p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors text-center"
               >
-                <div>
-                  <h3 className="font-semibold group-hover:text-orange-400 transition-colors">
-                    {tonality.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{tonality.tagline}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
+                <p className="font-medium text-foreground">{t.name}</p>
+                <p className="text-sm text-orange-600 dark:text-orange-400">{t.tagline}</p>
               </Link>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center p-8 rounded-xl bg-zinc-900">
+        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
-            Let Prospeda Find the Right Words
+            Let Prospeda write in the McCarthy tonality for you
           </h2>
-          <p className="text-zinc-400 mb-6 max-w-xl mx-auto">
-            Prospeda knows when to deploy McCarthy's prophetic weight and when simpler is better.
-            The AI matches the message to the moment.
+          <p className="text-orange-100 mb-6 max-w-xl mx-auto">
+            AI research + human review. 50-100 qualified leads monthly in your voice.
           </p>
-          <a href="https://prospeda.com" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
-              Try Prospeda Free
+          <a href="https://buy.stripe.com/6oU5kD0VN5BLggqeS193y01">
+            <Button size="lg" className="bg-white text-teal-700 hover:bg-zinc-100">
+              Get Started — $2,500/mo
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
         </div>
-      </div>
+      </main>
+
+      <footer className="border-t border-border mt-16">
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-muted-foreground text-sm">© {new Date().getFullYear()} Prospeda</div>
+          <div className="flex gap-6 text-sm">
+            <Link href="/free-tools/tonalities" className="text-muted-foreground hover:text-foreground">All Tonalities</Link>
+            <Link href="/free-tools" className="text-muted-foreground hover:text-foreground">Free Tools</Link>
+            <a href="https://github.com/Prospeda/claude-gtm-skills" className="text-muted-foreground hover:text-foreground">GitHub</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

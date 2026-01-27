@@ -1,309 +1,315 @@
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { CopyButton } from '@/components/copy-button';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
+import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Steve Jobs Tonality | Brutally Direct Sales Writing',
-  description: 'Write like Steve Jobs. Brutally direct, product-obsessed, emotionally intense. Copy-paste prompts for cold emails, discovery calls, and objection handling.',
+  title: 'Steve Jobs Tonality | Brutally Direct Sales Writing | Free GTM Prompts',
+  description: 'Write like Steve Jobs. Brutally direct, product-obsessed, emotionally intense. Copy these Claude/ChatGPT prompts for high-stakes deals and premium positioning.',
+  keywords: 'steve jobs communication style, reality distortion field sales, product launch messaging, apple email style, steve jobs writing, direct sales communication',
   openGraph: {
-    title: 'The Steve Jobs Approach to Sales Communication',
-    description: 'Brutally direct, product-obsessed, emotionally intense. Based on internal Apple emails revealed through litigation.',
+    title: 'Steve Jobs Tonality | Brutally Direct Sales Writing',
+    description: 'Write like Steve Jobs. Brutally direct, product-obsessed, emotionally intense. Free prompts for Claude & ChatGPT.',
+    type: 'website',
   },
 };
 
-const prompts = [
-  {
-    id: 'jobs-cold-email',
-    title: 'Cold Email Prompt',
-    description: 'Write a cold email with Steve Jobs directness',
-    prompt: `Write a cold email in the Steve Jobs style.
+const coldEmailPrompt = `Write a cold email in the Steve Jobs tonality.
 
 Context:
-- Recipient: [NAME, TITLE at COMPANY]
-- Their situation: [WHAT YOU KNOW ABOUT THEM]
-- My product: [WHAT I'M SELLING]
-- Key differentiator: [WHAT MAKES IT SPECIAL]
+- Prospect: [NAME], [TITLE] at [COMPANY]
+- Signal: [What triggered this outreach - funding, hire, product launch, etc.]
+- My product: [What you sell]
+- Key differentiator: [Why you're superior to alternatives]
 
-Steve Jobs Rules:
+Steve Jobs Style Rules:
 - Short, declarative sentences. One idea per sentence.
-- No corporate jargon. No filler words. No "I hope this finds you well."
-- High emotional intensity - passion, urgency, even frustration if warranted
-- Product as the hero. Let the work speak.
-- Be willing to challenge their current approach directly
-- Create urgency through vision, not artificial deadlines
-- Subject line: 5 words max, no clickbait, states the point
+- No corporate jargon. No filler words. No "hope this finds you well."
+- High emotional intensity—passion, urgency, even controlled frustration.
+- The product is the hero. Speak about it with conviction.
+- Create urgency through clarity, not manipulation.
+- Reference asymmetry when relevant (you have something they need).
+- Under 75 words. Every word must earn its place.
 
-The email should feel like it was written by someone who genuinely believes their product is better and respects the recipient enough to be direct about it.`,
-  },
-  {
-    id: 'jobs-discovery',
-    title: 'Discovery Call Prompt',
-    description: 'Run a discovery call with Jobs-level directness',
-    prompt: `Generate discovery call questions in the Steve Jobs style.
+Tone: Confident. Direct. A little dangerous.`;
+
+const discoveryCallPrompt = `Generate Steve Jobs-style discovery questions.
 
 Context:
-- Prospect: [COMPANY NAME]
-- Their role: [TITLE]
-- What they currently use: [COMPETITOR/CURRENT SOLUTION]
-- My product: [WHAT I'M SELLING]
+- Prospect company: [COMPANY]
+- Their likely problem: [PROBLEM AREA]
+- My solution: [WHAT YOU OFFER]
 
-Steve Jobs Discovery Rules:
-- Cut through politeness to get to truth
-- Ask questions that challenge their assumptions
-- Don't accept vague answers - push for specifics
-- Be passionate about understanding their real problems
-- Show genuine curiosity, not scripted interest
-- Call out elephants in the room directly
+Steve Jobs Approach to Discovery:
+- Ask questions that reveal whether they understand the problem
+- Challenge mediocre thinking directly
+- Cut through corporate-speak to find the real issue
+- Show impatience with complexity (simplify or die)
+- Make them feel the cost of inaction
 
-Generate 8 questions that:
-1. Challenge their status quo ("Why are you still using...")
-2. Quantify the pain ("What does that cost you in...")
-3. Expose the gap between where they are and where they could be
-4. Are short and direct (no compound questions)`,
-  },
-  {
-    id: 'jobs-objection',
-    title: 'Objection Handling Prompt',
-    description: 'Handle objections with Jobs-level conviction',
-    prompt: `Help me respond to this objection using Steve Jobs directness:
+Generate 5 questions that:
+1. Expose the gap between where they are and where they should be
+2. Challenge assumptions about their current approach
+3. Create urgency through clarity
+4. Position you as someone who sees what others miss`;
 
-Objection: "[THE OBJECTION THEY RAISED]"
+const objectionPrompt = `Handle this objection in the Steve Jobs tonality.
+
+The objection: [PASTE OBJECTION HERE]
 
 Context:
-- My product: [WHAT I'M SELLING]
-- Their company: [COMPANY NAME]
-- Why they're wrong: [THE TRUTH ABOUT THIS OBJECTION]
+- My product: [WHAT YOU SELL]
+- Why we're better: [KEY DIFFERENTIATOR]
 
-Steve Jobs Objection Rules:
-- Don't apologize or be defensive
-- Reframe the conversation around what matters
-- Use asymmetry of conviction - you believe more than they doubt
-- Short sentences. No hedging. No "I understand, but..."
-- If they're wrong, tell them they're wrong (respectfully)
-- Bring it back to the product and what it does
-- Create a reality distortion field around your vision
+Steve Jobs Response Framework:
+- Don't be defensive. Be direct.
+- Acknowledge reality, then reframe it.
+- Use asymmetry: you have leverage they don't see yet.
+- Make the cost of NOT choosing you crystal clear.
+- Short sentences. Conviction over explanation.
+- End with a clear, binary choice.
 
-The response should make them question their objection, not make me question my product.`,
-  },
-  {
-    id: 'jobs-linkedin',
-    title: 'LinkedIn Message Prompt',
-    description: 'LinkedIn connection request with Jobs brevity',
-    prompt: `Write a LinkedIn connection request in Steve Jobs style.
+Generate a response that commands the conversation.`;
+
+const linkedinPrompt = `Write a LinkedIn message in the Steve Jobs tonality.
 
 Context:
-- Target: [NAME, TITLE at COMPANY]
-- Why I'm reaching out: [SPECIFIC REASON]
-- What I offer: [MY VALUE PROP]
+- Recipient: [NAME], [TITLE]
+- Connection point: [How you're connected or what triggered this]
+- What I want: [Meeting, intro, feedback, etc.]
 
 Steve Jobs LinkedIn Rules:
-- Under 50 words. Every word earns its place.
-- No "I'd love to connect" - state what you want
-- One clear reason to connect
-- No flattery that isn't earned
-- Direct about your intent
-- Make them curious, not comfortable
+- No pleasantries. Get to it.
+- One clear idea. One clear ask.
+- Show you've thought deeply about something they care about
+- Create intrigue through confidence, not desperation
+- Under 50 words. Respect their time by being brief.
+- Make it feel like an opportunity, not a pitch.`;
 
-The message should feel like it's from someone important who respects their time.`,
-  },
-];
+const exampleOutput = `Subject: Quick question
+
+Sarah —
+
+Your product is good. It could be great.
+
+The difference is distribution. You're building features. Your competitors are building channels.
+
+We solved this for Stripe, Notion, and Linear. Same stage you're at now.
+
+I have 15 minutes Tuesday. Let's see if it fits.
+
+— Marcus`;
+
+const realExample = `"I'm sure you realize the asymmetry in the financial resources of our respective companies when you say: 'We will both just end up paying a lot of lawyers a lot of money.'"
+
+— Steve Jobs to Palm CEO, when Palm threatened litigation`;
 
 const relatedTonalities = [
-  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer Obsessed' },
+  { slug: 'jeff-bezos', name: 'Jeff Bezos', tagline: 'Customer-Obsessed' },
   { slug: 'chris-voss', name: 'Chris Voss', tagline: 'Tactical Empathy' },
   { slug: 'hemingway', name: 'Hemingway', tagline: 'Radically Brief' },
   { slug: 'cormac-mccarthy', name: 'Cormac McCarthy', tagline: 'Sparse & Powerful' },
 ];
 
-export default function SteveJobsPage() {
+export default function SteveJobsTonalityPage() {
   return (
-    <div className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-          <Link href="/free-tools" className="hover:text-foreground transition-colors">
-            Free Tools
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/free-tools/tonalities" className="hover:text-foreground transition-colors">
-            Tonalities
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-foreground">Steve Jobs</span>
-        </div>
+    <div className="min-h-screen bg-background">
+      <Header />
 
+      <main className="max-w-4xl mx-auto px-6 py-16">
         {/* Hero */}
-        <div className="mb-12">
-          <Badge variant="outline" className="mb-4 border-zinc-500/30 text-zinc-400">
-            Tonality
-          </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Brutally Direct
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            The Steve Jobs approach: Product-obsessed, emotionally intense, no corporate jargon.
+        <div className="text-center mb-12">
+          <Badge variant="accent" className="mb-4">GTM Tonality</Badge>
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600 dark:text-orange-400">
+              <Zap className="h-6 w-6" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Steve Jobs
+            </h1>
+          </div>
+          <p className="text-xl text-orange-600 dark:text-orange-400 font-medium mb-4">
+            Brutally Direct. Product-Obsessed. Emotionally Intense.
           </p>
-          <blockquote className="border-l-4 border-zinc-500 pl-4 italic text-zinc-400">
-            "I'm sure you realize the asymmetry in the financial resources of our respective companies when you say: 'We will both just end up paying a lot of lawyers a lot of money.'"
-            <cite className="block text-sm mt-2 not-italic">— Steve Jobs to Palm CEO</cite>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Based on internal Apple emails revealed through litigation. Short sentences. No jargon.
+            High intensity. The product is the hero.
+          </p>
+        </div>
+
+        {/* Real Example Quote */}
+        <div className="bg-zinc-950 rounded-xl p-6 mb-12 border-l-4 border-orange-500">
+          <blockquote className="text-zinc-300 italic mb-4">
+            {realExample.split('\n\n')[0]}
           </blockquote>
+          <p className="text-sm text-zinc-500">{realExample.split('\n\n')[1]}</p>
         </div>
 
-        {/* Philosophy */}
+        {/* The Philosophy */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">The Philosophy</h2>
-          <div className="prose prose-invert max-w-none">
-            <p className="text-muted-foreground">
-              The Steve Jobs tonality is based on internal Apple emails revealed through litigation.
-              It's characterized by an almost uncomfortable level of directness - the kind that comes
-              from someone who genuinely believes their product is better and respects you enough
-              to tell you the truth.
+          <h2 className="text-2xl font-bold text-foreground mb-6">The Philosophy</h2>
+          <div className="prose prose-zinc dark:prose-invert max-w-none">
+            <p>
+              Jobs didn't write emails. He wrote declarations. Every sentence was a stake in the ground.
+              No hedging. No corporate cushioning. Just raw conviction about what matters.
             </p>
-            <p className="text-muted-foreground mt-4">
-              Jobs didn't use filler. He didn't soften. He stated facts, created urgency through
-              vision, and let the product speak. When he needed leverage, he used it openly.
-              When he believed something, he said it with conviction that made you question your doubts.
+            <p>
+              This tonality works because it signals <strong>supreme confidence</strong>. When you write
+              like someone who doesn't need the deal, you become someone worth dealing with.
             </p>
           </div>
 
-          <div className="mt-6">
-            <h3 className="font-semibold mb-3">Key Characteristics</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-orange-400">•</span>
-                Short, declarative sentences. One idea per sentence.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-orange-400">•</span>
-                No corporate jargon or filler words.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-orange-400">•</span>
-                High emotional intensity - passion, urgency, even frustration.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-orange-400">•</span>
-                Product as the hero. Let the work speak.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-orange-400">•</span>
-                Willing to use power asymmetry as leverage.
-              </li>
-            </ul>
-          </div>
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">Key Characteristics</h3>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Short, declarative sentences.</strong> One idea. One sentence. Period.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">No corporate jargon.</strong> No "synergy." No "leverage." No "circle back."</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">High emotional intensity.</strong> Passion, urgency, even controlled frustration.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Product as hero.</strong> You're not selling. You're revealing something superior.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-orange-500">→</span>
+              <span className="text-muted-foreground"><strong className="text-foreground">Asymmetric leverage.</strong> Make them feel what they'll miss.</span>
+            </li>
+          </ul>
 
-          <div className="mt-6 grid md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-              <h4 className="font-semibold text-green-400 mb-2">When to Use</h4>
+          <h3 className="text-lg font-semibold text-foreground mt-8 mb-4">When to Use</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
+              <h4 className="font-medium text-green-600 dark:text-green-400 mb-2">Best For</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• High-stakes deals needing urgency</li>
-                <li>• Cutting through bureaucracy</li>
-                <li>• Premium product positioning</li>
-                <li>• Product-focused technical buyers</li>
+                <li>• High-stakes deals needing command presence</li>
+                <li>• Cutting through bureaucracy with urgency</li>
+                <li>• Premium positioning (superior product)</li>
+                <li>• Product-focused buyers who value craft</li>
               </ul>
             </div>
-            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
-              <h4 className="font-semibold text-red-400 mb-2">When NOT to Use</h4>
+            <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/20">
+              <h4 className="font-medium text-red-600 dark:text-red-400 mb-2">Avoid When</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>• Early relationship building</li>
-                <li>• Consensus-driven organizations</li>
-                <li>• When you lack product superiority</li>
-                <li>• Risk-averse regulated industries</li>
+                <li>• Building rapport with relationship-first buyers</li>
+                <li>• Early discovery where listening matters more</li>
+                <li>• Regulated industries needing soft touch</li>
+                <li>• Prospects who need hand-holding</li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Prompts */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Copy-Paste Prompts</h2>
-          <div className="space-y-6">
-            {prompts.map((prompt) => (
-              <div
-                key={prompt.id}
-                className="p-6 rounded-xl border border-border bg-card"
-              >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{prompt.title}</h3>
-                    <p className="text-sm text-muted-foreground">{prompt.description}</p>
-                  </div>
-                  <CopyButton text={prompt.prompt} />
-                </div>
-                <div className="bg-zinc-900 rounded-lg p-4 font-mono text-sm">
-                  <pre className="text-zinc-300 whitespace-pre-wrap overflow-x-auto">
-                    {prompt.prompt}
-                  </pre>
-                </div>
-              </div>
-            ))}
+        {/* Prompts Section */}
+        <div className="space-y-8 mb-12">
+          <h2 className="text-2xl font-bold text-foreground">The Prompts</h2>
+
+          {/* Cold Email */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Cold Email</h3>
+              <CopyButton text={coldEmailPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{coldEmailPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Discovery Call */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Discovery Call Questions</h3>
+              <CopyButton text={discoveryCallPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{discoveryCallPrompt}</pre>
+            </div>
+          </div>
+
+          {/* Objection Handling */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">Objection Handling</h3>
+              <CopyButton text={objectionPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{objectionPrompt}</pre>
+            </div>
+          </div>
+
+          {/* LinkedIn Message */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-lg font-semibold text-foreground">LinkedIn Message</h3>
+              <CopyButton text={linkedinPrompt} />
+            </div>
+            <div className="bg-zinc-950 rounded-xl p-6 overflow-x-auto">
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono">{linkedinPrompt}</pre>
+            </div>
           </div>
         </div>
 
         {/* Example Output */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Example Output</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/20">
-              <h4 className="font-semibold text-red-400 mb-2 text-sm">Before (Generic)</h4>
-              <p className="text-sm text-muted-foreground">
-                "Hi John, I hope this email finds you well! I wanted to reach out because I noticed
-                your company might be interested in solutions that could potentially help streamline
-                your workflow processes. Would you be open to a quick call to discuss?"
-              </p>
-            </div>
-            <div className="p-4 rounded-lg bg-green-500/5 border border-green-500/20">
-              <h4 className="font-semibold text-green-400 mb-2 text-sm">After (Jobs Style)</h4>
-              <p className="text-sm text-muted-foreground">
-                "John - Your engineering team is wasting 20 hours a week on deployment.
-                I can show you how Acme ships 10x faster with half the ops burden.
-                15 minutes. Thursday?"
-              </p>
-            </div>
+          <h2 className="text-2xl font-bold text-foreground mb-6">Example Output</h2>
+          <div className="bg-card border border-border rounded-xl p-6">
+            <pre className="text-sm text-foreground whitespace-pre-wrap">{exampleOutput}</pre>
           </div>
         </div>
 
         {/* Related Tonalities */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Other Tonalities</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {relatedTonalities.map((tonality) => (
+          <h2 className="text-2xl font-bold text-foreground mb-6">Other Tonalities</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {relatedTonalities.map((t) => (
               <Link
-                key={tonality.slug}
-                href={`/free-tools/tonalities/${tonality.slug}`}
-                className="group p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors flex items-center justify-between"
+                key={t.slug}
+                href={`/free-tools/tonalities/${t.slug}`}
+                className="p-4 rounded-lg border border-border hover:border-orange-500/50 transition-colors text-center"
               >
-                <div>
-                  <h3 className="font-semibold group-hover:text-orange-400 transition-colors">
-                    {tonality.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{tonality.tagline}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-400 group-hover:translate-x-1 transition-all" />
+                <p className="font-medium text-foreground">{t.name}</p>
+                <p className="text-sm text-orange-600 dark:text-orange-400">{t.tagline}</p>
               </Link>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center p-8 rounded-xl bg-zinc-900">
+        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
-            Let Prospeda Write Like Jobs For You
+            Let Prospeda write in the Jobs tonality for you
           </h2>
-          <p className="text-zinc-400 mb-6 max-w-xl mx-auto">
-            Prospeda automatically applies the Steve Jobs tonality when the situation calls for it.
-            Premium positioning, cutting through bureaucracy, high-stakes deals.
+          <p className="text-orange-100 mb-6 max-w-xl mx-auto">
+            AI research + human review. 50-100 qualified leads monthly in your voice.
           </p>
-          <a href="https://prospeda.com" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
-              Try Prospeda Free
+          <a href="https://buy.stripe.com/6oU5kD0VN5BLggqeS193y01">
+            <Button size="lg" className="bg-white text-teal-700 hover:bg-zinc-100">
+              Get Started — $2,500/mo
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
         </div>
-      </div>
+      </main>
+
+      <footer className="border-t border-border mt-16">
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-muted-foreground text-sm">© {new Date().getFullYear()} Prospeda</div>
+          <div className="flex gap-6 text-sm">
+            <Link href="/free-tools/tonalities" className="text-muted-foreground hover:text-foreground">All Tonalities</Link>
+            <Link href="/free-tools" className="text-muted-foreground hover:text-foreground">Free Tools</Link>
+            <a href="https://github.com/Prospeda/claude-gtm-skills" className="text-muted-foreground hover:text-foreground">GitHub</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
