@@ -24,7 +24,50 @@ import {
   Sparkles,
   TrendingUp,
   Shield,
+  HelpCircle,
 } from 'lucide-react';
+
+// FAQ data for SEO and LLM optimization
+const faqs = [
+  {
+    question: 'What is GTM Skills?',
+    answer: 'GTM Skills is a free, open-source library of 2,000+ AI prompts for B2B sales and marketing. It includes prompts organized by industry (SaaS, FinTech, Healthcare), role (SDR, AE, CSM), workflow (prospecting, discovery, closing), and methodology (MEDDPICC, SPIN, Challenger). All prompts work with Claude, ChatGPT, Gemini, and any LLM.',
+  },
+  {
+    question: 'How do I use GTM Skills with Claude or ChatGPT?',
+    answer: 'Simply browse the library, find a prompt that fits your use case, click the Copy button, and paste it into Claude, ChatGPT, or any AI assistant. Replace the bracketed placeholders [LIKE THIS] with your specific context. For power users, install our MCP Server to access prompts directly inside Claude Desktop.',
+  },
+  {
+    question: 'Is GTM Skills really free?',
+    answer: 'Yes, GTM Skills is 100% free and open source under the MIT license. There are no paywalls, no signup required to copy prompts, and no usage limits. You can use it commercially or personally. The project is maintained by Prospeda and the community.',
+  },
+  {
+    question: 'What makes these prompts different from generic AI prompts?',
+    answer: 'Every prompt in GTM Skills is specifically designed for B2B sales and marketing workflows. They include proper context-setting, output formatting, and sales-specific terminology. The prompts are battle-tested by sales professionals and optimized for real scenarios like cold outreach, discovery calls, objection handling, and proposal writing.',
+  },
+  {
+    question: 'Can I contribute my own prompts?',
+    answer: 'Absolutely! GTM Skills is community-driven. Fork the GitHub repository, add your prompts following our template, and submit a pull request. We review contributions within 48 hours. Check our CONTRIBUTING.md guide for detailed instructions.',
+  },
+  {
+    question: 'What is the MCP Server?',
+    answer: 'The MCP (Model Context Protocol) Server is a tool that integrates GTM Skills directly into Claude Desktop. It provides 10 AI-powered tools and 6 interactive UIs for tasks like company research, email drafting, objection handling, and more—all accessible without leaving your Claude conversation.',
+  },
+];
+
+// JSON-LD for FAQ structured data
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
 
 const categories = [
   {
@@ -112,6 +155,11 @@ const trustLogos = [
 export default function Home() {
   return (
     <div className="flex flex-col">
+      {/* FAQ JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         {/* Background gradient */}
@@ -544,6 +592,40 @@ Rules:
             <p className="text-xs text-muted-foreground mt-4">
               No spam. Unsubscribe anytime. We respect your inbox.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-card/50 border-y border-border">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 border-zinc-700 text-zinc-400">
+              <HelpCircle className="h-3 w-3 mr-1" />
+              FAQ
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground">
+              Everything you need to know about GTM Skills
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors"
+              >
+                <h3 className="font-semibold text-lg mb-2 text-foreground">
+                  {faq.question}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
