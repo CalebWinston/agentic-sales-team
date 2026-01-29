@@ -82,6 +82,127 @@ When we want full automation:
 
 ## Content Drafts
 
+---
+
+### TWITTER THREAD - Draft 3: Moltbot Memory for GTM
+
+```
+HOOK (Tweet 1):
+Most AI sales tools forget everything the moment you close the chat.
+
+I've been running sales agents that remember every prospect, every deal, every conversation—permanently.
+
+Here's how Moltbot's memory system works for GTM: 🧵
+
+---
+
+Tweet 2:
+The problem with AI for sales:
+
+You talk to a prospect on Monday.
+By Wednesday, the AI has zero context.
+You're starting from scratch every time.
+
+That's not augmentation. That's a liability.
+
+---
+
+Tweet 3:
+Moltbot (formerly Clawdbot) solves this with persistent memory.
+
+Not RAM. Not session storage.
+
+Plain Markdown files that persist forever:
+- MEMORY.md → long-term prospect facts
+- memory/YYYY-MM-DD.md → daily context
+
+Your agent remembers like a human would.
+
+---
+
+Tweet 4:
+How I use it for sales:
+
+MEMORY.md stores:
+- Prospect company context
+- Key pain points they mentioned
+- Deal stage and timeline
+- Objections they raised
+- What resonated with them
+
+Every conversation builds on the last.
+
+---
+
+Tweet 5:
+The magic: multi-channel memory.
+
+Start a deal conversation on WhatsApp.
+Continue on Telegram.
+Reference it from Discord.
+
+Same memory. Same context. One unified agent.
+
+Session scope = "per-sender" means each prospect has their own persistent brain.
+
+---
+
+Tweet 6:
+Before context compaction (when memory fills up), Moltbot does something clever:
+
+It triggers an automatic "memory flush"—prompting the model to save important facts before summarizing.
+
+Your prospect details never get lost.
+
+---
+
+Tweet 7:
+Key settings for GTM agents:
+
+session.scope: "per-sender"
+→ Each prospect gets own context
+
+compaction.memoryFlush.enabled: true
+→ Auto-save before summarization
+
+contextPruning.mode: "adaptive"
+→ Preserve important context intelligently
+
+---
+
+Tweet 8:
+The result:
+
+"Hey John, last time we talked you mentioned the CFO needed to sign off and budget was tight until Q2. Did that change after the board meeting?"
+
+That's not scripted. That's remembered.
+
+---
+
+Tweet 9:
+I wrote up a full explainer on using Moltbot for GTM agents:
+
+gtm-skills.com/free-tools/moltbot
+
+Covers:
+- Memory architecture
+- Multi-channel setup
+- Config for sales agents
+- Sample moltbot.json
+
+---
+
+Tweet 10:
+If you're building AI sales agents, memory isn't a nice-to-have.
+
+It's the difference between a novelty and a real tool.
+
+Moltbot: molt.bot
+Full guide: gtm-skills.com/free-tools/moltbot
+```
+
+---
+
 ### TWITTER THREAD - Draft 1
 
 ```
@@ -328,6 +449,92 @@ Follow if you want the update.
 
 ---
 
+### LINKEDIN POST - Draft 3: Moltbot Memory for Sales
+
+```
+The biggest problem with AI for sales isn't intelligence.
+
+It's amnesia.
+
+—
+
+Every AI sales tool I've tried has the same fatal flaw:
+
+You have a great conversation with a prospect on Monday.
+By Wednesday, the AI has zero memory of it.
+You're starting from scratch every single time.
+
+That's not augmentation. That's a liability.
+
+—
+
+I've been running sales agents differently.
+
+Using Moltbot (formerly Clawdbot), my agents have persistent memory that survives across:
+• Sessions
+• Days
+• Weeks
+• Channels (WhatsApp, Telegram, Discord, Slack)
+
+When I talk to a prospect, the agent remembers everything from every previous conversation.
+
+—
+
+How the memory system works:
+
+Two layers of storage (plain Markdown files):
+
+1. MEMORY.md - Long-term facts
+   "John @ Acme: Series B, CFO needs to approve, budget cycle is Q2, concerned about integration complexity"
+
+2. memory/YYYY-MM-DD.md - Daily logs
+   "2024-01-29: Called John, discussed pricing, he's looping in their IT director, follow up next Thursday"
+
+Both persist indefinitely. Both are searchable. Both load automatically.
+
+—
+
+The multi-channel piece is key for sales.
+
+Start a conversation on WhatsApp.
+Continue on Telegram.
+The agent remembers both.
+
+Session scope = "per-sender" means each prospect has their own persistent context.
+
+No more "remind me what we discussed." The agent knows.
+
+—
+
+Before the AI's context window fills up, Moltbot does something clever:
+
+It triggers an automatic "memory flush"—prompting the model to save important facts before summarizing old context.
+
+Your prospect details are never lost.
+
+—
+
+I wrote up a full guide on configuring Moltbot for GTM agents:
+
+gtm-skills.com/free-tools/moltbot
+
+Covers:
+• Memory architecture deep dive
+• Multi-channel configuration
+• Sample config for sales agents
+• Key settings explained
+
+—
+
+If you're building AI sales workflows, memory isn't optional.
+
+It's the difference between a demo toy and a real tool.
+
+What's your current approach to AI memory in sales?
+```
+
+---
+
 ### LINKEDIN POST - Draft 1
 
 ```
@@ -473,6 +680,150 @@ gtm-skills.com
 What's working in your outbound right now?
 
 Genuine question - trying to learn from what others are testing.
+```
+
+---
+
+### REDDIT r/sales - Draft 3: Moltbot Memory for Sales
+
+```
+TITLE: How I'm using persistent AI memory to actually remember prospects (Moltbot setup)
+
+---
+
+Been experimenting with AI for sales workflows and the biggest limitation I kept hitting: memory.
+
+Every tool forgets everything the moment you close the chat. Talk to a prospect Monday, by Wednesday the AI has zero context. You're basically starting fresh every time.
+
+**The Solution: Moltbot (formerly Clawdbot)**
+
+It's a messaging gateway that connects WhatsApp/Telegram/Discord/Slack to Claude (or other models), but the killer feature is persistent memory.
+
+**How the memory works:**
+
+Instead of RAM that disappears, it stores everything in Markdown files:
+
+- `MEMORY.md` - Long-term facts about prospects (company context, pain points, deal stage, objections raised)
+- `memory/YYYY-MM-DD.md` - Daily conversation logs
+
+Both files persist forever and auto-load at session start.
+
+**Why this matters for sales:**
+
+1. **Continuity** - "Last time you mentioned the CFO needed to approve this and budget was tight until Q2..." — that's not scripted, that's remembered
+
+2. **Multi-channel** - Start convo on WhatsApp, continue on Telegram. Same memory.
+
+3. **No manual notes** - The AI tracks deal details automatically
+
+4. **Compaction safety** - Before context fills up, it auto-prompts the model to save important facts
+
+**Key config for sales:**
+
+```json
+{
+  "session": {
+    "scope": "per-sender"  // Each prospect gets own context
+  },
+  "compaction": {
+    "memoryFlush": { "enabled": true }  // Save before summarizing
+  }
+}
+```
+
+**I wrote up a full guide:**
+
+gtm-skills.com/free-tools/moltbot
+
+Covers memory architecture, multi-channel setup, sample config for sales agents.
+
+**The project itself:**
+
+molt.bot (install: `npm install -g moltbot@latest`)
+
+---
+
+Curious if anyone else is running AI with persistent memory for sales. What's your setup?
+```
+
+---
+
+### REDDIT r/ChatGPT - Draft 3: Moltbot Memory System
+
+```
+TITLE: Deep dive: How Moltbot's persistent memory system works (Markdown-based, semantic search, multi-channel)
+
+---
+
+I've been digging into Moltbot's memory architecture and wanted to share how it works for anyone building AI agents that need to remember things long-term.
+
+**The Problem Moltbot Solves:**
+
+Most AI tools have session-based memory that disappears when you close the chat. For use cases like sales, support, or personal assistants, you need persistence across days/weeks/months.
+
+**How Moltbot Does Memory:**
+
+**1. File-based storage (not RAM)**
+
+Memory is stored as plain Markdown in your workspace:
+
+```
+~/clawd/
+├── MEMORY.md           # Long-term durable facts
+└── memory/
+    ├── 2024-01-28.md   # Yesterday's context
+    └── 2024-01-29.md   # Today's notes
+```
+
+At session start, it loads MEMORY.md + last 2 days of logs automatically.
+
+**2. Semantic search (hybrid BM25 + vector)**
+
+The system builds a semantic index over memory files:
+- Vector embeddings for meaning-based search
+- BM25 for exact keyword matching
+- Default: 70% vector, 30% text weighting
+
+You can search for concepts even if the wording is different.
+
+**3. Auto memory flush before compaction**
+
+When context approaches token limits, Moltbot triggers a silent turn prompting the model to save important memories before summarizing. Critical details don't get lost.
+
+**4. Multi-channel persistence**
+
+Memory is shared across WhatsApp, Telegram, Discord, Slack, etc. Session scope can be:
+- `per-sender` - each person has own context
+- `per-channel` - shared context per channel
+- `global` - one context for everything
+
+**Config example:**
+
+```json
+{
+  "session": {
+    "scope": "per-sender",
+    "reset": {
+      "mode": "idle",
+      "idleMinutes": 480
+    }
+  },
+  "agents": {
+    "defaults": {
+      "contextPruning": { "mode": "adaptive" },
+      "compaction": {
+        "memoryFlush": { "enabled": true }
+      }
+    }
+  }
+}
+```
+
+**Full docs:** docs.molt.bot
+
+**I wrote a guide on using this for sales/GTM agents specifically:** gtm-skills.com/free-tools/moltbot
+
+Anyone else using file-based memory for AI agents? Curious about other approaches.
 ```
 
 ---
