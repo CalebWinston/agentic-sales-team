@@ -4,14 +4,14 @@
 
 ```bash
 # Step 1: Preview content
-node scripts/distribute.js --list          # See all drafts
-node scripts/distribute.js --preview twitter 1   # Preview specific draft
+node scripts/poasting.js --list          # See all drafts
+node scripts/poasting.js --preview twitter 1   # Preview specific draft
 
 # Step 2: Copy content, paste into Buffer GUI
 # Open https://publish.buffer.com
 
 # Step 3 (optional): Run enhancers before posting
-node scripts/distribute.js --enhance twitter 1
+node scripts/poasting.js --enhance twitter 1
 ```
 
 ---
@@ -19,9 +19,9 @@ node scripts/distribute.js --enhance twitter 1
 ## Progress & Roadmap
 
 ### Current Status: Buffer GUI (Manual)
-- ✅ Content drafts ready (2 Twitter, 2 LinkedIn, 2 Reddit)
+- ✅ Content drafts ready (5 Twitter, 6 LinkedIn, 4 Reddit)
 - ✅ CLI tool for preview/enhance
-- ✅ `/distribute` slash command
+- ✅ `/poasting` slash command
 - ✅ LinkedIn timing guard (blocks 8am-5:30pm EST)
 - ⏸️ Buffer API blocked (they deprecated new developer apps)
 
@@ -46,6 +46,37 @@ When we want full automation:
 
 ---
 
+## Adaptation Rules (Don't Copy, Capture)
+
+When rewriting viral content, extract the MECHANICS, not the WORDS.
+
+**What to steal:**
+- Hook structure (question, contrarian, result)
+- Engagement mechanics (comment CTAs, lists, specificity)
+- Rhythm and pacing (short/long sentence patterns)
+- Proof elements (numbers, names, outcomes)
+
+**What to change:**
+- Actual words and phrases
+- Story/context (make it ours)
+- Examples and specifics
+- Voice and tone (match our platform style)
+
+**The formula:**
+```
+THEIR FORMAT + OUR ANGLE + OUR EXAMPLES = Original post that works
+```
+
+**Example transformation:**
+
+Original mechanic: "What if your AI could learn from [experts]? → List of names → I built [thing]"
+
+Our adaptation: "Every AI writes the same way. → Problem → I wanted different → List of names → I built [thing]"
+
+Same skeleton. Different flesh.
+
+---
+
 ## The Story Angle
 
 **Core narrative:** "I built an agentic sales stack that transforms how AEs work. Here's the open-source prompt library that powers it."
@@ -65,12 +96,28 @@ When we want full automation:
 - **Format:** Thread (7-10 tweets), hook + substance + resource
 - **Audience:** Sales tech builders, SDR/AE practitioners, AI enthusiasts
 - **What works:** Specificity, contrarian takes, "here's exactly how" energy
+- **Style:** lowercase. no caps at sentence start. raw energy. typing fast.
 
 ### LinkedIn Tone
 - **Vibe:** Professional but human, insight-led, generous expertise
 - **Format:** Single post with line breaks, story arc, soft CTA
 - **Audience:** Sales leaders, RevOps, GTM executives
 - **What works:** Pattern interrupts, relatable pain, actionable frameworks
+- **Style:** Proper punctuation. Sentence caps. Still human, but polished.
+
+### Word Choice: Avoid "AI"
+
+Don't say "AI" — it's vague and overused. Be precise:
+
+| Instead of | Say |
+|------------|-----|
+| AI | LLM, Claude, GPT, agentic |
+| AI agent | agentic BDR, agentic workflow |
+| AI sales tool | agentic GTM, Claude-powered |
+| AI automation | agentic automation, LLM-powered |
+| AI can do this | Claude can do this, your agentic BDR can do this |
+
+**Why:** "AI" is meaningless now. Everyone claims AI. Precision signals expertise.
 
 ### Reddit Tone
 - **Vibe:** Peer sharing genuinely useful thing, zero self-promotion smell
@@ -84,7 +131,7 @@ When we want full automation:
 
 ---
 
-### TWITTER THREAD - Draft 3: Moltbot Memory for GTM
+### TWITTER: Moltbot Memory for GTM (Thread)
 
 ```
 HOOK (Tweet 1):
@@ -203,7 +250,7 @@ Full guide: gtm-skills.com/free-tools/moltbot
 
 ---
 
-### TWITTER THREAD - Draft 1
+### TWITTER: Agentic Sales Stack Story (Thread)
 
 ```
 HOOK (Tweet 1):
@@ -333,7 +380,7 @@ Especially interested in:
 - Your biggest automation wins
 ```
 
-### TWITTER THREAD - Draft 2 (More Technical)
+### TWITTER: pSEO Technical Build (Thread)
 
 ```
 HOOK:
@@ -449,7 +496,322 @@ Follow if you want the update.
 
 ---
 
-### LINKEDIN POST - Draft 3: Moltbot Memory for Sales
+### TWITTER: Speed to Lead (Long-Form Article)
+
+**Format:** Twitter Article/Note (not a thread) — ~900 words
+**Style:** lowercase sentence starts for casual twitter-native feel
+
+```
+the moltbot debate misses the point: speed to lead is everything
+
+everyone's arguing about whether moltbot (formerly clawdbot) is revolutionary or risky. 60,000 github stars. andrej karpathy calling it the future. heather adkins saying "don't run it." david sacks investing.
+
+here's what nobody's talking about: this might be the most important tool for sales teams in a decade.
+
+not because it's cool AI. because of one brutal reality:
+
+if you don't respond to a lead in 5 minutes, you're already losing.
+
+---
+
+the speed to lead problem
+
+insidesales.com found that responding to a lead within 5 minutes makes you 100x more likely to connect than waiting 30 minutes. MIT research shows the odds of qualifying a lead drop 21x after just 30 minutes.
+
+yet the average B2B response time? 47 hours.
+
+not 47 minutes. 47 hours.
+
+your competitors are responding in 5 minutes with "hey, saw you downloaded our whitepaper, got 10 minutes tomorrow?" while your SDRs are working through a queue, context-switching between 47 browser tabs, trying to remember who this person is.
+
+the lead goes cold. the deal dies. not because your product was worse—because you were slow.
+
+---
+
+why traditional AI doesn't solve this
+
+chatgpt and claude are amazing. but they're reactive. they sit there waiting for you to ask them something.
+
+a lead comes in at 2 AM? your AI assistant doesn't care. it's not watching your inbox. it doesn't know this person downloaded three whitepapers and visited your pricing page twice.
+
+you wake up, check your messages, start your day, and finally get to that lead 9 hours later. by then, they've already had three demos with competitors.
+
+---
+
+what makes moltbot different for sales
+
+three things matter:
+
+1. proactive engagement
+
+moltbot can message *you* first. it's not waiting for you to ask—it's watching signals and flagging opportunities.
+
+lead comes in from a company that matches your ICP? moltbot can alert you instantly, pre-research the account, and draft your outreach before you even know they exist.
+
+this isn't AI as a tool you use. it's AI as a teammate watching your back.
+
+2. persistent memory
+
+most AI forgets everything between sessions. moltbot remembers.
+
+every interaction with a lead, every piece of context you've gathered, every preference they've mentioned—it's stored and searchable. when that lead resurfaces 6 months later, you have instant context.
+
+no more "let me check my notes." no more CRM archaeology. the context is just... there.
+
+3. multi-channel native
+
+leads don't care about your preferred channel. they message on linkedin, email, twitter, slack—wherever's convenient for them.
+
+moltbot works across all of them. same memory. same context. same speed.
+
+a lead DMs you on twitter at 11 PM? your agentic BDR can acknowledge within seconds, gather intel, and tee up a warm handoff for the morning.
+
+---
+
+the agentic BDR reality
+
+here's where it gets interesting.
+
+an agentic BDR powered by moltbot doesn't sleep. doesn't take weekends. doesn't need coffee breaks. doesn't context-switch.
+
+it's monitoring signals 24/7:
+- pricing page visits
+- email opens
+- linkedin engagement
+- inbound chat requests
+- form submissions
+
+the moment something happens, it acts. not next business day. not when the SDR finishes their current task. immediately.
+
+is this replacing humans? no. it's giving humans superhuman response times.
+
+your best AE still closes the deal. your SDR still builds relationships. but they're no longer losing opportunities to a 47-hour response time problem.
+
+---
+
+the security debate
+
+yes, giving AI agents access to your systems has risks. the people worried about this aren't wrong.
+
+but here's the reality: the companies that figure out how to safely deploy agentic AI will have a structural advantage. the ones who wait for "perfect security" will watch their leads get poached by competitors who moved faster.
+
+the answer isn't "don't use it." it's "use it thoughtfully."
+
+sandbox it. limit permissions. audit actions. start with low-risk use cases like lead response and expand from there.
+
+---
+
+the bottom line
+
+the debate about moltbot's significance misses the most practical application.
+
+forget autonomous coding for a second. forget AI agents running your whole company.
+
+focus on this: an AI that can respond to leads in seconds instead of hours.
+
+that alone is worth the github stars.
+
+speed to lead is everything. timing is the unfair advantage nobody talks about. and moltbot might be the first tool that actually solves the response time problem at scale.
+
+while everyone argues about whether it's revolutionary or dangerous, the smart sales teams are quietly deploying it and watching their connect rates skyrocket.
+
+the leads don't wait for the debate to settle.
+
+---
+
+building agentic BDR workflows with moltbot? check out gtm-skills.com/free-tools/moltbot for the full implementation guide.
+```
+
+---
+
+### TWITTER: BDR Bitch Boy (Long-Form Article, Hardcore GTM)
+
+**Format:** Twitter Article/Note — ~950 words
+**Style:** lowercase, raw, hardcore GTM operator voice, aggressive confidence
+
+```
+the moltbot debate is missing the point. here's how i actually use it.
+
+i've closed millions in deals. sat across from CFOs who wanted to watch me sweat. walked out of boardrooms where the wrong word meant walking away empty.
+
+and you know what i learned?
+
+the deals aren't won in the room. they're won before anyone sits down.
+
+the rep who gets there first wins. period.
+
+---
+
+speed to lead is the only metric that matters
+
+MIT research: respond in 5 minutes vs 30 minutes = 100x more likely to connect.
+
+yet the average B2B response time? 47 hours.
+
+while your SDRs are "prioritizing their pipeline" and "working through the queue," your competitor already booked the meeting.
+
+i don't lose deals because my product is worse. i lose deals because someone else showed up first.
+
+so i stopped letting that happen.
+
+---
+
+moltbot is my bdr bitch boy
+
+i'm not being cute. that's what he is.
+
+all the annoying parts of GTM? the stuff that makes you want to throw your laptop? he does it. and he does it well. extremely well. exceedingly well.
+
+24/7 this thing is working for me:
+
+- scanning for leads that match my ICP
+- monitoring intent signals
+- watching for trigger events
+- researching accounts before i even know they exist
+
+when he finds something? he tells me. immediately.
+
+telegram ping at 2 AM: "found a VP of Sales at a series B fintech. they just posted a job for 3 SDRs. budget is moving. here's the angle."
+
+i wake up, glance at my phone, approve the outreach. go back to sleep.
+
+by 9 AM the meeting's booked.
+
+---
+
+he crafts my outreach. not template garbage.
+
+every message sounds like me because it IS me.
+
+he's read every deal i've closed. every email that got a response. every cold call that converted. he knows my voice better than my marketing team does.
+
+when he writes outreach, it's not "i noticed your company is growing" bullshit. it's specific. it's personal. it references the exact pain point that company is dealing with right now.
+
+and here's the thing that makes people uncomfortable:
+
+when he cold calls a prospect? he does it in my voice.
+
+when he leaves a linkedin voice message? my voice.
+
+not some robot. not some generic AI tone. MY voice. trained on hours of my calls.
+
+the prospect thinks they're talking to me. because functionally, they are.
+
+---
+
+he remembers everything
+
+had a conversation with a prospect 6 months ago? they went dark? suddenly they're back?
+
+moltbot remembers every detail.
+
+"hey john, last time we talked you said the CFO needed to sign off and budget was tight until Q2. you also mentioned your daughter's soccer tournament was that weekend. how'd that go? and more importantly—did Q2 budget come through?"
+
+that's not scripted. that's remembered.
+
+every conversation we have, he gets better. learns what works. learns what doesn't. adapts.
+
+day 1 he was good. day 90 he's scary good.
+
+---
+
+the workflow
+
+here's how my day actually works now:
+
+morning: check telegram. moltbot has 3-5 warm leads queued with research briefs and draft outreach. i approve, tweak, or kill each one in under 2 minutes.
+
+during the day: he monitors. new signal comes in—job posting, funding announcement, linkedin engagement—he flags it. i get a ping. "worth pursuing?" yes or no.
+
+calls: he's already left voice messages to the ones i approved. some call back. those go straight to my calendar.
+
+evening: he sends me a summary. what worked. what didn't. what's in the pipeline.
+
+i focus on closing. he focuses on everything else.
+
+---
+
+"but isn't this risky?"
+
+yeah. giving an AI agent access to your outreach has risks.
+
+you know what else is risky? losing every deal because you're too slow.
+
+the companies figuring out how to deploy this safely will eat the companies waiting for "perfect security."
+
+i'm not reckless. i sandbox it. i review before anything goes out. i audit what he's doing.
+
+but i'm also not sitting on the sidelines while my competitors move faster.
+
+---
+
+the bottom line
+
+everyone's debating whether moltbot is revolutionary or dangerous. 60k github stars. VCs investing. security people freaking out.
+
+here's what i know:
+
+i haven't missed a hot lead in 4 months. my response time is under 3 minutes. my pipeline is fuller than it's ever been.
+
+moltbot isn't replacing me. he's multiplying me.
+
+he handles the grind. i handle the close.
+
+that's the game now.
+
+---
+
+if you want to see how i configured this:
+gtm-skills.com/free-tools/moltbot
+
+or keep doing it the old way. more leads for me.
+```
+
+---
+
+### LINKEDIN: 24 Tonalities Launch (Name-Drop List + Comment CTA)
+
+**Format:** Single post with comment engagement hack
+**Engagement target:** High comments (CTA drives replies)
+**Inspired by:** Udi Menkes "Awesome PM Skills" post (221 likes, 383 comments)
+**Adapted elements:** Name-drop credibility, specific numbers, comment CTA — NOT copied: different hook, structure, voice
+
+```
+Every AI writes the same way.
+
+Formal. Safe. Forgettable.
+
+Meanwhile, the best salespeople in history each had a distinct voice that moved people to action.
+
+Hormozi's urgency. Voss's tactical empathy. Ogilvy's precision. Sandler's psychology.
+
+I wanted my AI to write like them. Not like a committee.
+
+So I built tonality modes.
+
+24 of them. Each one captures how a specific master communicates:
+
+• Alex Hormozi — high-pressure, offer-driven
+• Chris Voss — negotiation, mirroring, labeling
+• Seth Godin — permission, tribes, remarkable
+• David Ogilvy — long-form, direct response
+• Naval Ravikant — leverage, first principles
+• Hemingway — short, concrete, visceral
+• The Challenger Sale — teaching, tailoring, control
+• MEDDIC — qualification, metrics, process
+
+Plus 16 more covering everything from executive briefings to win-back campaigns.
+
+Pick a tonality. Feed it your context. Get copy that actually sounds like something.
+
+Free. Open source. Works with Claude Code and Cursor.
+
+Comment "tonalities" and I'll drop the link.
+```
+
+---
+
+### LINKEDIN: Moltbot Memory System (Persistent Context)
 
 ```
 The biggest problem with AI for sales isn't intelligence.
@@ -535,7 +897,7 @@ What's your current approach to AI memory in sales?
 
 ---
 
-### LINKEDIN POST - Draft 1
+### LINKEDIN: AE Workflow Transformation (Three Agents)
 
 ```
 I rebuilt how my AE team works.
@@ -613,7 +975,7 @@ Curious if anyone else is running agent-based systems.
 
 ---
 
-### LINKEDIN POST - Draft 2 (Story-Led)
+### LINKEDIN: 12 Meetings Story (Research Agent Results)
 
 ```
 Last month an AE on my team booked 12 meetings in one week.
@@ -684,7 +1046,85 @@ Genuine question - trying to learn from what others are testing.
 
 ---
 
-### REDDIT r/sales - Draft 3: Moltbot Memory for Sales
+### LINKEDIN: Tonalities — AI Writes Like a Committee (Voice Problem)
+
+**Format:** Problem-first, name-drop credibility, comment CTA
+**Angle:** Generic AI voice is forgettable. Distinct voices close deals.
+
+```
+ChatGPT writes like a committee.
+
+Safe. Formal. Forgettable.
+
+Every cold email sounds the same. Every LinkedIn message reads like it was generated by the same intern.
+
+That's not how closers communicate.
+
+The best salespeople have distinct voices:
+
+• Hormozi — urgency, scarcity, "you'd be stupid not to"
+• Chris Voss — mirrors, labels, tactical empathy
+• Ogilvy — long-form persuasion, direct response
+• Sandler — pain funnels, upfront contracts, reversals
+• Naval — first principles, leverage, clarity
+
+I studied how each of them writes. The patterns. The word choices. The rhythm.
+
+Then I built 24 tonality modes.
+
+Pick one. Feed it your context. Get copy that sounds like a human with a point of view.
+
+Not corporate. Not safe. Not forgettable.
+
+Totally free. No signup. No email gate. Just use it.
+
+Comment "voice" and I'll send the link.
+```
+
+---
+
+### LINKEDIN: Generic AI Problem — 2500+ Prompts (Specificity Fix)
+
+**Format:** Pain example, problem diagnosis, solution with specifics, comment CTA
+**Angle:** AI doesn't know sales. We taught it.
+
+```
+I asked ChatGPT to write a cold email last week.
+
+It gave me:
+
+"I hope this email finds you well. I wanted to reach out because I believe our solution could add value to your organization."
+
+That's not a cold email. That's a delete button magnet.
+
+The problem isn't AI. It's that AI doesn't know sales.
+
+It doesn't know MEDDIC. It doesn't know Challenger. It doesn't know the difference between discovery questions for a CFO vs. a VP of Engineering.
+
+So I built a prompt library that does.
+
+2,500+ prompts organized by:
+
+• Industry (SaaS, FinTech, Healthcare, Manufacturing)
+• Role (SDR, AE, CSM, Founder)
+• Workflow (Research, Outreach, Discovery, Negotiation)
+
+Every combination has specific prompts built on frameworks that actually close.
+
+Not "write a cold email."
+
+"Write a cold email for a Series B FinTech CFO using pain-based Sandler methodology, referencing their recent hiring surge as a trigger event."
+
+That's the difference.
+
+Totally free. No signup. No gated PDF nonsense.
+
+Comment "prompts" and I'll drop the link.
+```
+
+---
+
+### REDDIT r/sales: Moltbot Persistent Memory Setup
 
 ```
 TITLE: How I'm using persistent AI memory to actually remember prospects (Moltbot setup)
@@ -748,7 +1188,7 @@ Curious if anyone else is running AI with persistent memory for sales. What's yo
 
 ---
 
-### REDDIT r/ChatGPT - Draft 3: Moltbot Memory System
+### REDDIT r/ChatGPT: Moltbot Memory Architecture Deep Dive
 
 ```
 TITLE: Deep dive: How Moltbot's persistent memory system works (Markdown-based, semantic search, multi-channel)
@@ -828,7 +1268,7 @@ Anyone else using file-based memory for AI agents? Curious about other approache
 
 ---
 
-### REDDIT r/sales - Draft 1
+### REDDIT r/sales: 2500+ Prompts Open Source Launch
 
 ```
 TITLE: I open-sourced 2,500+ sales prompts organized by industry/role/workflow - free to use
@@ -881,7 +1321,7 @@ Not trying to sell anything. No email capture or gated content. Just a resource 
 
 ---
 
-### REDDIT r/sales - Draft 2 (Problem-Led)
+### REDDIT r/sales: 6 Months Building Prompts (Problem-Led Story)
 
 ```
 TITLE: Spent 6 months building prompts for my sales team - sharing the full library (free)
@@ -930,7 +1370,7 @@ What prompts would be useful that aren't in there? Happy to add more if there's 
 
 ---
 
-### REDDIT r/ChatGPT - Draft 1
+### REDDIT r/ChatGPT: pSEO System — 2500 Pages Programmatically
 
 ```
 TITLE: I built a system that generates 2,500+ unique prompt pages programmatically - here's how
@@ -1053,7 +1493,7 @@ To add a new copywriting style, append to this section:
 
 1. **Preview your content**
    ```bash
-   node scripts/distribute.js --preview twitter 1
+   node scripts/poasting.js --preview twitter 1
    ```
 
 2. **Open Buffer**
