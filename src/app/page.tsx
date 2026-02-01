@@ -6,7 +6,6 @@ import { GitHubStars } from '@/components/github-stars';
 import { AnimatedChatDemo } from '@/components/animated-chat-demo';
 
 // New homepage sections (Weeks 1-8 features)
-import { OpenClawPromo } from '@/components/home/openclaw-promo';
 import { EcosystemBar } from '@/components/home/ecosystem-bar';
 import { ToolsGrid } from '@/components/home/tools-grid';
 import { LeaderboardPreview } from '@/components/home/leaderboard-preview';
@@ -174,8 +173,23 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
+      {/* OpenClaw Announcement Banner - Above the fold */}
+      <Link href="/openclaw" className="block">
+        <div className="bg-gradient-to-r from-orange-500/20 via-red-500/10 to-orange-500/20 border-b border-orange-500/30 py-3 px-4 hover:from-orange-500/30 hover:via-red-500/20 hover:to-orange-500/30 transition-all cursor-pointer">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-sm">
+            <span className="text-xl">🦞</span>
+            <span className="text-white font-medium">
+              <span className="hidden sm:inline">NEW: </span>GTM Skills now available for OpenClaw
+            </span>
+            <span className="text-orange-400 hidden sm:inline">10 skills • 2,500+ prompts</span>
+            <ArrowRight className="h-4 w-4 text-orange-400" />
+          </div>
+        </div>
+      </Link>
+
       {/* Hero */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative py-16 md:py-24 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-transparent to-transparent" />
 
@@ -186,11 +200,6 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto">
             {/* Top badges */}
             <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-              <Link href="/openclaw">
-                <Badge variant="outline" className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10 transition-colors cursor-pointer animate-pulse">
-                  🦞 Now on OpenClaw
-                </Badge>
-              </Link>
               <Badge variant="outline" className="border-orange-500/30 text-orange-400">
                 <Star className="h-3 w-3 mr-1 fill-orange-400" />
                 Free & Open Source
@@ -202,8 +211,10 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              The GTM Operating System for
-              <span className="block bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+              The GTM Operating System
+              <br className="hidden sm:block" />
+              <span className="sm:inline"> for </span>
+              <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                 Agentic Sales
               </span>
             </h1>
@@ -275,9 +286,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* OpenClaw Promo - Featured Integration */}
-      <OpenClawPromo />
 
       {/* Ecosystem Bar - Shows all features */}
       <EcosystemBar />
