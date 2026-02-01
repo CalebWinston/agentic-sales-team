@@ -128,8 +128,41 @@
 - `src/components/json-ld.tsx` - Reusable JSON-LD components
 
 **Next:**
-- Browser Extension MVP (Week 2 of 10X plan)
 - HubSpot Plugin MVP (Week 4 of 10X plan)
+- Browser Extension polishing + Chrome Web Store submission
+
+---
+
+### Week 3 Continued - January 31, 2026
+
+**Focus: Browser Extension MVP (10X Plan Week 2)**
+
+**Completed:**
+- [x] Chrome extension project structure (Manifest V3)
+- [x] LinkedIn content script with floating action button
+- [x] Gmail content script with compose integration
+- [x] Sidebar panel UI with search and recommendations
+- [x] Popup with stats and quick actions
+- [x] API integration for contextual prompts
+- [x] esbuild build system
+- [x] Extension README with setup instructions
+
+**Commits:**
+- `1885215` - feat: Add Chrome extension for LinkedIn and Gmail integration
+
+**New Files:**
+- `extension/manifest.json` - Chrome extension manifest
+- `extension/src/content/linkedin.ts` - LinkedIn integration
+- `extension/src/content/gmail.ts` - Gmail integration
+- `extension/src/background/service-worker.ts` - Background script
+- `extension/sidebar/` - Side panel UI
+- `extension/popup/` - Extension popup
+
+**To Load Extension:**
+1. Go to `chrome://extensions/`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select `gtm-skills/extension` folder
 
 ---
 
