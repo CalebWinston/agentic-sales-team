@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CopyButton } from '@/components/copy-button';
+import { SoftwareSourceCodeJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 import { roles, getRolePrompts } from '@/lib/prompts';
 import { ArrowLeft, Download, ChevronRight } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -42,7 +43,23 @@ export default async function RoleDetailPage({ params }: Props) {
   const prompts = getRolePrompts(slug);
 
   return (
-    <div className="py-12 md:py-20">
+    <>
+      <SoftwareSourceCodeJsonLd
+        name={`${role.name} AI Prompts - GTM Skills`}
+        description={role.description}
+        url={`https://gtm-skills.com/role/${slug}`}
+        category={role.name}
+        promptCount={role.count}
+        keywords={['sales prompts', role.name.toLowerCase(), 'AI prompts']}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: 'https://gtm-skills.com' },
+          { name: 'Roles', url: 'https://gtm-skills.com/role' },
+          { name: role.name, url: `https://gtm-skills.com/role/${slug}` },
+        ]}
+      />
+      <div className="py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
@@ -158,5 +175,6 @@ export default async function RoleDetailPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
