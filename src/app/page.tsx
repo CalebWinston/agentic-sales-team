@@ -4,6 +4,16 @@ import { Badge } from '@/components/ui/badge';
 import { FeedbackWidget } from '@/components/feedback-widget';
 import { GitHubStars } from '@/components/github-stars';
 import { AnimatedChatDemo } from '@/components/animated-chat-demo';
+
+// New homepage sections (Weeks 1-8 features)
+import { EcosystemBar } from '@/components/home/ecosystem-bar';
+import { ToolsGrid } from '@/components/home/tools-grid';
+import { LeaderboardPreview } from '@/components/home/leaderboard-preview';
+import { VoiceShowcase } from '@/components/home/voice-showcase';
+import { DevelopersSection } from '@/components/home/developers-section';
+import { CertificationPromo } from '@/components/home/certification-promo';
+import { ContributorsSpotlight } from '@/components/home/contributors-spotlight';
+
 import {
   ArrowRight,
   Building2,
@@ -186,15 +196,15 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              2,500+ GTM Prompts for
+              The GTM Operating System for
               <span className="block bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
-                B2B Sales & Marketing
+                Agentic Sales
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-              The most comprehensive GTM prompt library for Claude, ChatGPT, and any LLM.
-              Industry packs, role playbooks, workflows, and methodologies.
+              2,500+ prompts, voice templates, browser extension, API, certifications, and more.
+              Everything you need to build agentic sales workflows.
             </p>
 
             {/* Value prop callout */}
@@ -259,6 +269,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ecosystem Bar - Shows all features */}
+      <EcosystemBar />
 
       {/* Tonalities Showcase - Hero Follow */}
       <section className="py-16 md:py-20 bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-transparent border-y border-purple-500/20">
@@ -339,6 +352,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Tools & Integrations Grid - NEW */}
+      <ToolsGrid />
 
       {/* Categories Grid */}
       <section className="py-16 md:py-24">
@@ -454,6 +470,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Leaderboard Preview - NEW */}
+      <LeaderboardPreview />
 
       {/* How It Works */}
       <section className="py-16 md:py-24">
@@ -656,6 +675,18 @@ Rules:
           </div>
         </div>
       </section>
+
+      {/* Voice Showcase - NEW */}
+      <VoiceShowcase />
+
+      {/* Certification Promo - NEW */}
+      <CertificationPromo />
+
+      {/* Developers Section - NEW */}
+      <DevelopersSection />
+
+      {/* Contributors Spotlight - NEW */}
+      <ContributorsSpotlight />
 
       {/* Support the Project CTA */}
       <section className="py-16 md:py-24">
