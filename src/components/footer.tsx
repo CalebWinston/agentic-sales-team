@@ -1,32 +1,38 @@
 import Link from 'next/link';
-import { Github } from 'lucide-react';
+import { Github, Twitter, Linkedin } from 'lucide-react';
 
 const footerLinks = {
   Prompts: [
-    { name: 'Industry Prompts', href: '/industry' },
-    { name: 'Role Playbooks', href: '/role' },
-    { name: 'Workflows', href: '/workflow' },
-    { name: 'Methodologies', href: '/methodology' },
-    { name: 'Tonalities', href: '/free-tools/tonalities' },
+    { name: 'By Role', href: '/role' },
+    { name: 'By Industry', href: '/industry' },
+    { name: 'By Methodology', href: '/methodology' },
+    { name: 'All Prompts', href: '/prompts' },
   ],
   Tools: [
+    { name: 'Browser Extension', href: '/download' },
+    { name: 'Voice Templates', href: '/voice-templates' },
+    { name: 'HubSpot', href: '/integrations/hubspot' },
     { name: 'MCP Server', href: '/free-tools/mcp-server' },
-    { name: 'Claude Integrations', href: '/free-tools/claude-integrations' },
-    { name: 'Claude Projects', href: '/projects' },
-    { name: 'Download All', href: '/download' },
   ],
   Community: [
+    { name: 'Leaderboard', href: '/leaderboard' },
+    { name: 'Contributors', href: '/contributors' },
+    { name: 'Certifications', href: '/certifications' },
+    { name: 'Submit Prompt', href: '/leaderboard/submit' },
+  ],
+  Developers: [
+    { name: 'API Docs', href: '/developers' },
+    { name: 'OpenAPI Spec', href: '/openapi.json' },
+    { name: 'llms.txt', href: '/llms.txt' },
     { name: 'GitHub', href: 'https://github.com/Prospeda/gtm-skills' },
-    { name: 'Contribute', href: 'https://github.com/Prospeda/gtm-skills/blob/main/CONTRIBUTING.md' },
-    { name: 'Contact', href: 'mailto:hello@gtm-skills.com' },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/50">
+    <footer className="border-t border-border bg-zinc-900/50">
       <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -36,7 +42,7 @@ export function Footer() {
               <span className="font-semibold text-foreground">GTM Skills</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              2,500+ copy-paste prompts for B2B sales and marketing.
+              The GTM Operating System for Agentic Sales.
             </p>
             <div className="flex gap-4">
               <a
@@ -44,8 +50,27 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
+              </a>
+              <a
+                href="https://twitter.com/prospeda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a
+                href="https://linkedin.com/company/prospeda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -59,6 +84,8 @@ export function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       {link.name}
@@ -75,11 +102,18 @@ export function Footer() {
             © {new Date().getFullYear()} GTM Skills. MIT License.
           </p>
           <p className="text-sm text-muted-foreground">
-            Built by the{' '}
+            Made with <span className="text-red-400">♥</span> by{' '}
             <a
-              href="https://github.com/Prospeda/gtm-skills/graphs/contributors"
+              href="https://prospeda.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-foreground hover:underline"
+            >
+              Prospeda
+            </a>
+            {' '}and the{' '}
+            <a
+              href="/contributors"
               className="text-foreground hover:underline"
             >
               community
