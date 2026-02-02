@@ -14,41 +14,62 @@ export const metadata = {
 };
 
 const endpoints = [
+  // Prompts
   {
     method: 'GET',
     path: '/api/v1/prompts',
     description: 'List all prompts with filtering',
-    params: 'category, role, industry, limit',
+    params: 'category, role, industry, search, limit',
+    category: 'Prompts',
   },
   {
     method: 'GET',
     path: '/api/v1/prompts/:id',
     description: 'Get a specific prompt by ID',
     params: 'id',
+    category: 'Prompts',
   },
   {
     method: 'GET',
     path: '/api/v1/prompts/recommend',
-    description: 'Get AI-recommended prompts',
+    description: 'Get context-aware prompt recommendations',
     params: 'role, industry, stage, limit',
+    category: 'Prompts',
   },
+  // OpenClaw
   {
     method: 'GET',
-    path: '/api/v1/leaderboard',
-    description: 'Get top prompts by votes',
-    params: 'period, limit',
+    path: '/api/v1/openclaw/skills',
+    description: 'List all OpenClaw GTM skills with commands and setup',
+    params: 'none',
+    category: 'OpenClaw',
+    isNew: true,
   },
+  // Agentic BDR
   {
-    method: 'POST',
-    path: '/api/v1/prompts/:id/copy',
-    description: 'Track prompt copy event',
-    params: 'id',
+    method: 'GET',
+    path: '/api/v1/agentic-bdr',
+    description: 'Get agentic workflows and agent configurations',
+    params: 'none',
+    category: 'Agentic BDR',
+    isNew: true,
   },
+  // MCP
+  {
+    method: 'GET',
+    path: '/api/v1/mcp',
+    description: 'Get MCP tools, config examples, and setup instructions',
+    params: 'none',
+    category: 'MCP Server',
+    isNew: true,
+  },
+  // Voice
   {
     method: 'GET',
     path: '/api/v1/voice/templates',
-    description: 'List voice templates',
+    description: 'List voice call templates for agentic SDR',
     params: 'category',
+    category: 'Voice',
   },
 ];
 
@@ -184,7 +205,9 @@ export default function DevelopersPage() {
             {endpoints.map((endpoint) => (
               <div
                 key={endpoint.path}
-                className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 hover:border-zinc-700 transition-colors"
+                className={`bg-zinc-900/50 border rounded-lg p-4 hover:border-zinc-700 transition-colors ${
+                  endpoint.isNew ? 'border-orange-500/30' : 'border-zinc-800'
+                }`}
               >
                 <div className="flex items-start gap-4">
                   <Badge
@@ -197,10 +220,20 @@ export default function DevelopersPage() {
                     {endpoint.method}
                   </Badge>
                   <div className="flex-1">
-                    <code className="text-white font-mono text-sm">{endpoint.path}</code>
+                    <div className="flex items-center gap-2">
+                      <code className="text-white font-mono text-sm">{endpoint.path}</code>
+                      {endpoint.isNew && (
+                        <Badge className="text-[10px] bg-orange-500/20 text-orange-400 border-orange-500/30">
+                          NEW
+                        </Badge>
+                      )}
+                    </div>
                     <p className="text-zinc-500 text-sm mt-1">{endpoint.description}</p>
                     <p className="text-zinc-600 text-xs mt-1">
-                      Params: <code className="text-zinc-500">{endpoint.params}</code>
+                      <span className="text-zinc-700">{endpoint.category}</span>
+                      {endpoint.params !== 'none' && (
+                        <> • Params: <code className="text-zinc-500">{endpoint.params}</code></>
+                      )}
                     </p>
                   </div>
                 </div>
