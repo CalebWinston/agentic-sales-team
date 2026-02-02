@@ -16,6 +16,8 @@ import {
   BookOpen,
   Code,
   FileCode,
+  Terminal,
+  Palette,
 } from 'lucide-react';
 
 interface NavItem {
@@ -36,10 +38,10 @@ const navigation: NavItem[] = [
     name: 'Tools',
     href: '/free-tools',
     children: [
-      { name: 'Browser Extension', href: '/download', icon: Globe, description: 'LinkedIn & Gmail integration' },
-      { name: 'Voice Templates', href: '/voice-templates', icon: Mic, description: 'Agentic voice calls' },
-      { name: 'HubSpot', href: '/integrations/hubspot', icon: Link2, description: 'CRM integration' },
+      { name: 'OpenClaw Skills', href: '/openclaw', icon: Terminal, description: 'GTM toolkit for OpenClaw' },
       { name: 'MCP Server', href: '/free-tools/mcp-server', icon: Bot, description: 'Claude Desktop tools' },
+      { name: 'Browser Extension', href: '/download', icon: Globe, description: 'LinkedIn & Gmail integration' },
+      { name: 'Tonalities', href: '/free-tools/tonalities', icon: Palette, description: '24 writing styles' },
     ],
   },
   {
