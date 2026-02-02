@@ -21,15 +21,19 @@ import {
   Palette,
   Clock,
   LayoutGrid,
+  Database,
+  Calendar,
+  Send,
+  Plug,
 } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'GTM MCP Server | AI Sales Tools for Claude Code & Desktop',
-  description: 'Add 10 AI-powered sales tools + 6 interactive UIs to Claude. Research companies, draft cold emails, handle objections with MCP Apps support.',
+  title: 'GTM MCP Server | AI Sales Tools with Real CRM Integration',
+  description: 'Add 18 AI-powered sales tools to Claude with real HubSpot CRM integration. Research, draft, and log activities directly from Claude.',
   openGraph: {
-    title: 'GTM MCP Server: Sales Tools with Interactive UIs',
-    description: 'Install the GTM MCP Server and get AI-powered sales tools with rich interactive interfaces in Claude Desktop.',
+    title: 'GTM MCP Server: Sales Tools with Real CRM Integration',
+    description: 'The only MCP server with real API integrations. HubSpot CRM, content generation, and agentic workflows for Claude.',
   },
 };
 
@@ -126,6 +130,84 @@ const tools = [
   },
 ];
 
+// HubSpot CRM Tools (Real API Integration)
+const hubspotTools = [
+  {
+    icon: Users,
+    name: 'hubspot_create_contact',
+    description: 'Create a new contact in HubSpot with email, name, company, and custom fields',
+  },
+  {
+    icon: Users,
+    name: 'hubspot_update_contact',
+    description: 'Update existing contact properties in HubSpot',
+  },
+  {
+    icon: Search,
+    name: 'hubspot_get_contact',
+    description: 'Get contact by ID or email address',
+  },
+  {
+    icon: Search,
+    name: 'hubspot_search_contacts',
+    description: 'Search contacts by name, email, or company',
+  },
+  {
+    icon: LineChart,
+    name: 'hubspot_create_deal',
+    description: 'Create a new deal with stage, amount, and associations',
+  },
+  {
+    icon: LineChart,
+    name: 'hubspot_update_deal',
+    description: 'Update deal stage, amount, close date, and notes',
+  },
+  {
+    icon: Mail,
+    name: 'hubspot_log_activity',
+    description: 'Log emails, calls, meetings, and notes to contact timeline',
+  },
+  {
+    icon: Workflow,
+    name: 'hubspot_get_pipelines',
+    description: 'Get deal pipelines and stages for proper deal tracking',
+  },
+];
+
+// Integration Roadmap
+const integrationRoadmap = [
+  {
+    name: 'HubSpot CRM',
+    status: 'live',
+    description: 'Contacts, deals, activities',
+    icon: Database,
+  },
+  {
+    name: 'Apollo Enrichment',
+    status: 'next',
+    description: 'Real prospect data',
+    icon: Search,
+  },
+  {
+    name: 'Gmail / Outlook',
+    status: 'planned',
+    description: 'Send emails directly',
+    icon: Send,
+  },
+  {
+    name: 'Calendly / Cal.com',
+    status: 'planned',
+    description: 'Booking links & availability',
+    icon: Calendar,
+  },
+  {
+    name: 'OpenClaw',
+    status: 'planned',
+    description: 'Full GTM from terminal',
+    icon: Terminal,
+  },
+];
+
 const workflows = [
   {
     name: 'prospecting_workflow',
@@ -201,6 +283,25 @@ const claudeDesktopConfig = `{
 
 const usageExamples = [
   {
+    title: 'Create Contact in HubSpot',
+    prompt: `Use hubspot_create_contact to add:
+- Email: sarah.chen@acme.com
+- First name: Sarah
+- Last name: Chen
+- Company: Acme Corp
+- Job title: VP of Sales`,
+    isHubSpot: true,
+  },
+  {
+    title: 'Log Activity to CRM',
+    prompt: `Use hubspot_log_activity:
+- Contact ID: 12345
+- Activity type: email
+- Subject: Follow-up on demo
+- Body: Sent proposal as discussed. Following up next week.`,
+    isHubSpot: true,
+  },
+  {
     title: 'Research a Company',
     prompt: 'Use the research_company tool to research Stripe for potential outreach to their engineering team.',
   },
@@ -213,26 +314,12 @@ const usageExamples = [
 - Tone: professional`,
   },
   {
-    title: 'Handle an Objection',
-    prompt: `Use handle_objection for:
-- Objection: "We're happy with our current solution"
-- Context: Enterprise deal, they use Salesforce
-- Product: Next-gen sales intelligence platform`,
-  },
-  {
-    title: 'Run Full Prospecting Workflow',
-    prompt: `Run the prospecting_workflow prompt for:
-- Company: Notion
-- Persona: VP of Revenue Operations
-- Product: Revenue intelligence platform`,
-  },
-  {
-    title: 'Competitive Deal Strategy',
-    prompt: `Run the competitive_deal_workflow for:
-- Company: TechCorp
-- Competitor: Salesforce
-- Product: Modern CRM platform
-- Deal stage: Evaluation`,
+    title: 'Full Workflow: Prospect + Log',
+    prompt: `1. Research Acme Corp with research_company
+2. Draft email with draft_cold_email
+3. Create contact in HubSpot with hubspot_create_contact
+4. Log the outreach with hubspot_log_activity`,
+    isHubSpot: true,
   },
 ];
 
@@ -252,29 +339,34 @@ export default function MCPServerPage() {
         {/* Hero */}
         <div className="mb-12">
           <div className="flex flex-wrap items-center gap-2 mb-4">
+            <Badge variant="outline" className="border-green-500/30 text-green-400">
+              <Plug className="h-3 w-3 mr-1" />
+              Real API Integrations
+            </Badge>
             <Badge variant="outline" className="border-cyan-500/30 text-cyan-400">
               Model Context Protocol
             </Badge>
             <Badge variant="outline" className="border-amber-500/30 text-amber-400">
               <Sparkles className="h-3 w-3 mr-1" />
-              MCP Apps Support
+              MCP Apps
             </Badge>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             GTM MCP Server
           </h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Add 10 AI-powered sales tools + 6 interactive UIs directly to Claude.
-            Research companies, draft outreach, handle objections - with rich visual interfaces.
+            <span className="text-green-400 font-semibold">18 tools</span> for sales - including{' '}
+            <span className="text-green-400 font-semibold">real HubSpot CRM integration</span>.
+            Research, draft, send, and log activities directly from Claude.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Terminal className="h-5 w-5" />
               <span>Claude Code & Desktop</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Sparkles className="h-5 w-5 text-amber-400" />
-              <span>6 Interactive UIs</span>
+            <div className="flex items-center gap-2 text-sm text-green-400">
+              <Database className="h-5 w-5" />
+              <span>HubSpot CRM</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Workflow className="h-5 w-5" />
@@ -338,9 +430,89 @@ export default function MCPServerPage() {
           </div>
         </div>
 
-        {/* Tools Overview */}
+        {/* HubSpot CRM Integration - Featured */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">10 Sales Tools</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-2xl font-bold">HubSpot CRM Integration</h2>
+            <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+              <Plug className="h-3 w-3 mr-1" />
+              Real API
+            </Badge>
+          </div>
+          <div className="p-4 rounded-xl bg-gradient-to-br from-green-500/10 via-transparent to-emerald-500/5 border border-green-500/20 mb-6">
+            <p className="text-muted-foreground">
+              <span className="text-green-400 font-semibold">Not templates.</span> These tools make real API calls to HubSpot.
+              Create contacts, update deals, log activities - all from Claude. Set <code className="text-green-400">HUBSPOT_API_KEY</code> to enable.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-3">
+            {hubspotTools.map((tool) => (
+              <div
+                key={tool.name}
+                className="p-4 rounded-xl border border-green-500/20 bg-green-500/5"
+              >
+                <div className="flex items-start gap-3">
+                  <tool.icon className="h-5 w-5 text-green-400 mt-0.5" />
+                  <div>
+                    <code className="text-sm font-semibold text-foreground">{tool.name}</code>
+                    <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Integration Roadmap */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Integration Roadmap</h2>
+          <p className="text-muted-foreground mb-6">
+            Building toward the complete GTM workflow: Research → Write → Send → Book → Track
+          </p>
+          <div className="grid md:grid-cols-5 gap-3">
+            {integrationRoadmap.map((item) => (
+              <div
+                key={item.name}
+                className={`p-4 rounded-xl border text-center ${
+                  item.status === 'live'
+                    ? 'border-green-500/30 bg-green-500/10'
+                    : item.status === 'next'
+                    ? 'border-amber-500/30 bg-amber-500/5'
+                    : 'border-border bg-card'
+                }`}
+              >
+                <item.icon className={`h-6 w-6 mx-auto mb-2 ${
+                  item.status === 'live'
+                    ? 'text-green-400'
+                    : item.status === 'next'
+                    ? 'text-amber-400'
+                    : 'text-muted-foreground'
+                }`} />
+                <div className="font-semibold text-sm">{item.name}</div>
+                <div className="text-xs text-muted-foreground mt-1">{item.description}</div>
+                <Badge
+                  variant="secondary"
+                  className={`text-[10px] mt-2 ${
+                    item.status === 'live'
+                      ? 'bg-green-500/20 text-green-400'
+                      : item.status === 'next'
+                      ? 'bg-amber-500/20 text-amber-400'
+                      : ''
+                  }`}
+                >
+                  {item.status === 'live' ? '✓ Live' : item.status === 'next' ? 'Next' : 'Planned'}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Content Generation Tools */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Content Generation Tools</h2>
+          <p className="text-muted-foreground mb-6">
+            AI-powered tools for creating sales content. These generate templates and frameworks based on your input.
+          </p>
           <div className="grid md:grid-cols-2 gap-3">
             {tools.map((tool) => (
               <div
@@ -413,6 +585,24 @@ export default function MCPServerPage() {
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-6">Configuration</h2>
 
+          {/* HubSpot API Key */}
+          <div className="mb-8 p-6 rounded-xl border border-green-500/20 bg-green-500/5">
+            <div className="flex items-center gap-2 mb-4">
+              <Database className="h-5 w-5 text-green-400" />
+              <h3 className="text-lg font-semibold">HubSpot Integration (Optional)</h3>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              Set your HubSpot API key to enable real CRM tools. Without it, only content generation tools are available.
+            </p>
+            <div className="bg-zinc-900 rounded-lg p-4 font-mono text-sm">
+              <div className="text-zinc-500"># Add to your environment</div>
+              <div className="text-green-400">export HUBSPOT_API_KEY=pat-na1-xxxxxxxx</div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-3">
+              Get your API key: HubSpot Settings → Integrations → Private Apps → Create app with CRM scopes
+            </p>
+          </div>
+
           {/* Claude Code */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
@@ -456,10 +646,23 @@ export default function MCPServerPage() {
             {usageExamples.map((example) => (
               <div
                 key={example.title}
-                className="p-4 rounded-xl border border-border bg-card"
+                className={`p-4 rounded-xl border ${
+                  example.isHubSpot
+                    ? 'border-green-500/20 bg-green-500/5'
+                    : 'border-border bg-card'
+                }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-semibold text-cyan-400">{example.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className={`font-semibold ${example.isHubSpot ? 'text-green-400' : 'text-cyan-400'}`}>
+                      {example.title}
+                    </h3>
+                    {example.isHubSpot && (
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-[10px]">
+                        HubSpot
+                      </Badge>
+                    )}
+                  </div>
                   <CopyButton text={example.prompt} />
                 </div>
                 <pre className="text-sm text-muted-foreground font-mono whitespace-pre-wrap">
