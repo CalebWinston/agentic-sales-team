@@ -5,7 +5,7 @@ import { ArrowRight, Search, MessageSquare, Target, Terminal, Zap, Check } from 
 export const metadata: Metadata = {
   title: "OpenClaw Skills - Your Agentic Sales Team",
   description:
-    "Install Scout, Writer, Rep, and Closer. Four AI agents that find prospects, craft copy, engage, and close deals 24/7.",
+    "Install Scout, Writer, Rep, and Closer. Four agents that find prospects, craft copy, engage, and close deals 24/7.",
   openGraph: {
     title: "OpenClaw GTM Skills - Agentic Sales Team",
     description: "Scout finds. Rep engages. Closer closes.",
@@ -65,7 +65,7 @@ export default function OpenClawPage() {
               Your Agentic Sales Team
             </h1>
             <p className="mx-auto mb-8 max-w-xl text-lg text-zinc-400">
-              Four AI agents. Find prospects. Craft copy. Engage. Close deals. 24/7.
+              Four agents. Find prospects. Craft copy. Engage. Close deals. 24/7.
             </p>
 
             <div className="mx-auto max-w-xl rounded-xl border border-orange-500/30 bg-zinc-900 p-5 mb-6">

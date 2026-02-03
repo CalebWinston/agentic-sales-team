@@ -173,7 +173,7 @@ export default function AgentsPage() {
             Meet the Team
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            Four AI agents. Your 24/7 sales team. They find prospects, write copy, engage, and close deals.
+            Four agents. Your 24/7 sales team. They find prospects, write copy, engage, and close deals.
           </p>
           <p className="text-sm text-muted-foreground">
             <strong>The Golden Rule:</strong> Every agent ends responses with a question or suggestion.

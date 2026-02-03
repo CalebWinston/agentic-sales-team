@@ -116,7 +116,7 @@ const agents = [
 export async function GET() {
   const response = {
     team: 'GTM Skills Agentic Sales Team',
-    description: 'Four AI agents. Your 24/7 sales team.',
+    description: 'Four agents. Your 24/7 sales team.',
     install_all: 'npx clawdhub install gtm-skills/scout gtm-skills/writer gtm-skills/rep gtm-skills/closer',
     flow: 'Scout finds → Writer crafts → Rep engages → Closer closes',
     agents,

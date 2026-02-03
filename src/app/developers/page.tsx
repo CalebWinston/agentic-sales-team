@@ -230,7 +230,7 @@ export default function DevelopersPage() {
           </div>
 
           <p className="text-zinc-400 mb-6">
-            Four AI agents for your sales team: <strong className="text-blue-400">Scout</strong> (research),
+            Four agents for your sales team: <strong className="text-blue-400">Scout</strong> (research),
             <strong className="text-yellow-400"> Writer</strong> (copy),
             <strong className="text-green-400"> Rep</strong> (outreach),
             <strong className="text-purple-400"> Closer</strong> (deals).
