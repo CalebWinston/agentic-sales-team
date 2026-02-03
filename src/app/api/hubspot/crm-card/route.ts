@@ -5,11 +5,8 @@ export const runtime = 'edge';
 /**
  * HubSpot CRM Card Endpoint
  *
- * This endpoint is called by HubSpot to render a custom CRM card
- * in the deal/contact sidebar with GTM prompt recommendations.
- *
- * HubSpot sends context about the current record (deal stage, contact info, etc.)
- * and we return relevant prompts based on that context.
+ * Shows GTM Skills agent recommendations in HubSpot deal/contact sidebar.
+ * Routes to Scout, Writer, Rep, or Closer based on context.
  */
 
 interface HubSpotCardRequest {
@@ -18,11 +15,9 @@ interface HubSpotCardRequest {
   associatedObjectId: number;
   associatedObjectType: string;
   portalId: number;
-  // Deal-specific fields
   dealStage?: string;
   dealAmount?: number;
   dealName?: string;
-  // Contact-specific fields
   contactEmail?: string;
   contactFirstName?: string;
   contactLastName?: string;
@@ -30,129 +25,198 @@ interface HubSpotCardRequest {
   contactJobTitle?: string;
 }
 
-interface CRMCardSection {
-  id: string;
-  title: string;
-  topLevelActions?: {
-    type: string;
-    text: string;
-    uri?: string;
-    onClick?: { type: string };
-  }[];
-  rows: {
-    type: string;
-    text?: string;
-    value?: string;
-    label?: string;
-    linkUrl?: string;
-  }[];
-}
+// Agent definitions
+const agents = {
+  scout: {
+    name: 'Scout',
+    color: '#3b82f6', // blue
+    description: 'Research & Intelligence',
+    icon: '🔍',
+  },
+  writer: {
+    name: 'Writer',
+    color: '#eab308', // yellow
+    description: 'Sales Copy & Content',
+    icon: '✍️',
+  },
+  rep: {
+    name: 'Rep',
+    color: '#22c55e', // green
+    description: 'Outreach & Engagement',
+    icon: '📧',
+  },
+  closer: {
+    name: 'Closer',
+    color: '#a855f7', // purple
+    description: 'Deals & Revenue',
+    icon: '🎯',
+  },
+};
 
-// Map HubSpot deal stages to our categories
-function stageToCategory(stage: string | undefined): string {
-  if (!stage) return 'discovery';
-
-  const stageLower = stage.toLowerCase();
-
-  // Common HubSpot deal stages
-  if (stageLower.includes('appointment') || stageLower.includes('scheduled') || stageLower.includes('qualified')) {
-    return 'discovery';
-  }
-  if (stageLower.includes('presentation') || stageLower.includes('demo') || stageLower.includes('decision')) {
-    return 'ae';
-  }
-  if (stageLower.includes('proposal') || stageLower.includes('contract') || stageLower.includes('negotiation')) {
-    return 'objections';
-  }
-  if (stageLower.includes('closed') || stageLower.includes('won')) {
-    return 'saas'; // Upsell/expansion
-  }
-
-  return 'discovery';
-}
-
-// Get role-based prompts for outreach
-function getContextualPrompts(
+// Map deal stages to recommended agents and actions
+function getAgentRecommendations(
   objectType: string,
   dealStage?: string,
   jobTitle?: string
-): { title: string; description: string; category: string }[] {
-  const category = stageToCategory(dealStage);
+): { agent: keyof typeof agents; action: string; description: string; url: string }[] {
   const isContact = objectType === 'CONTACT';
+  const stageLower = (dealStage || '').toLowerCase();
 
-  // Role-based personalization
+  // Role detection for contacts
   const isExecutive = jobTitle?.toLowerCase().match(/ceo|cto|cfo|coo|vp|director|head|chief/);
   const isTechnical = jobTitle?.toLowerCase().match(/engineer|developer|architect|tech/);
 
-  const prompts: { title: string; description: string; category: string }[] = [];
-
   if (isContact) {
-    // Contact-specific prompts for outreach
-    prompts.push({
-      title: 'Personalized Cold Email',
-      description: 'Generate a personalized outreach email based on their role and company',
-      category: 'outreach',
-    });
+    // Contact-focused recommendations
+    const recommendations = [
+      {
+        agent: 'scout' as const,
+        action: 'Research Contact',
+        description: 'Deep dive on this contact and their company',
+        url: '/agents?agent=scout&action=research',
+      },
+      {
+        agent: 'writer' as const,
+        action: 'Write Cold Email',
+        description: 'Personalized outreach email',
+        url: '/agents?agent=writer&action=cold-email',
+      },
+      {
+        agent: 'rep' as const,
+        action: 'Create Sequence',
+        description: 'Multi-touch outreach sequence',
+        url: '/agents?agent=rep&action=sequence',
+      },
+    ];
 
     if (isExecutive) {
-      prompts.push({
-        title: 'Executive Briefing',
-        description: 'Create an executive-level value proposition',
-        category: 'ae',
+      recommendations.unshift({
+        agent: 'writer' as const,
+        action: 'Executive Email',
+        description: 'C-suite appropriate messaging',
+        url: '/free-tools/tonalities/executive-briefing',
       });
     }
 
-    if (isTechnical) {
-      prompts.push({
-        title: 'Technical Value Prop',
-        description: 'Craft a technical deep-dive message',
-        category: 'saas',
-      });
-    }
-
-    prompts.push({
-      title: 'LinkedIn Connection Request',
-      description: 'Write a compelling LinkedIn message',
-      category: 'sdr',
-    });
-  } else {
-    // Deal-specific prompts based on stage
-    switch (category) {
-      case 'discovery':
-        prompts.push(
-          { title: 'Discovery Questions', description: 'SPIN-based discovery framework', category: 'discovery' },
-          { title: 'Pain Point Deep Dive', description: 'Uncover core business challenges', category: 'discovery' },
-          { title: 'Qualification Checklist', description: 'MEDDPICC qualification questions', category: 'discovery' }
-        );
-        break;
-      case 'ae':
-        prompts.push(
-          { title: 'Demo Script', description: 'Tailored demo talking points', category: 'ae' },
-          { title: 'ROI Calculator', description: 'Build a business case', category: 'ae' },
-          { title: 'Stakeholder Map', description: 'Identify decision makers', category: 'ae' }
-        );
-        break;
-      case 'objections':
-        prompts.push(
-          { title: 'Objection Handlers', description: 'Common objection responses', category: 'objections' },
-          { title: 'Negotiation Prep', description: 'Prepare for pricing discussions', category: 'objections' },
-          { title: 'Proposal Template', description: 'Structure your proposal', category: 'ae' }
-        );
-        break;
-      default:
-        prompts.push(
-          { title: 'Follow-up Email', description: 'Re-engage the prospect', category: 'outreach' },
-          { title: 'Case Study Pitch', description: 'Share relevant success story', category: 'ae' }
-        );
-    }
+    return recommendations.slice(0, 4);
   }
 
-  return prompts.slice(0, 4); // Max 4 prompts
+  // Deal stage-based recommendations
+  if (stageLower.includes('appointment') || stageLower.includes('scheduled') || stageLower.includes('qualified')) {
+    // Early stage - Discovery
+    return [
+      {
+        agent: 'scout',
+        action: 'Account Research',
+        description: 'Company intel and buying signals',
+        url: '/agents?agent=scout',
+      },
+      {
+        agent: 'writer',
+        action: 'Discovery Questions',
+        description: 'SPIN-based discovery framework',
+        url: '/methodology/spin-selling',
+      },
+      {
+        agent: 'rep',
+        action: 'Meeting Prep Email',
+        description: 'Confirm and set agenda',
+        url: '/agents?agent=rep&action=meeting-prep',
+      },
+    ];
+  }
+
+  if (stageLower.includes('presentation') || stageLower.includes('demo') || stageLower.includes('decision')) {
+    // Mid stage - Evaluation
+    return [
+      {
+        agent: 'writer',
+        action: 'Demo Follow-up',
+        description: 'Post-demo email with next steps',
+        url: '/agents?agent=writer&action=followup',
+      },
+      {
+        agent: 'closer',
+        action: 'MEDDPICC Check',
+        description: 'Qualification assessment',
+        url: '/methodology/meddic',
+      },
+      {
+        agent: 'writer',
+        action: 'ROI Business Case',
+        description: 'Build value justification',
+        url: '/agents?agent=writer&action=business-case',
+      },
+    ];
+  }
+
+  if (stageLower.includes('proposal') || stageLower.includes('contract') || stageLower.includes('negotiation')) {
+    // Late stage - Closing
+    return [
+      {
+        agent: 'closer',
+        action: 'Write Proposal',
+        description: 'Generate deal proposal',
+        url: '/agents?agent=closer&action=proposal',
+      },
+      {
+        agent: 'closer',
+        action: 'Handle Objections',
+        description: 'Price and competitor responses',
+        url: '/free-tools/tonalities/chris-voss',
+      },
+      {
+        agent: 'writer',
+        action: 'Urgency Email',
+        description: 'Create timeline pressure',
+        url: '/agents?agent=writer&action=urgency',
+      },
+    ];
+  }
+
+  if (stageLower.includes('closed') || stageLower.includes('won')) {
+    // Post-close
+    return [
+      {
+        agent: 'rep',
+        action: 'Onboarding Kickoff',
+        description: 'Welcome and next steps email',
+        url: '/agents?agent=rep&action=onboarding',
+      },
+      {
+        agent: 'scout',
+        action: 'Expansion Research',
+        description: 'Find upsell opportunities',
+        url: '/agents?agent=scout&action=expansion',
+      },
+    ];
+  }
+
+  // Default recommendations
+  return [
+    {
+      agent: 'scout',
+      action: 'Research Account',
+      description: 'Get intel on this deal',
+      url: '/agents?agent=scout',
+    },
+    {
+      agent: 'writer',
+      action: 'Write Follow-up',
+      description: 'Re-engage the prospect',
+      url: '/agents?agent=writer&action=followup',
+    },
+    {
+      agent: 'closer',
+      action: 'Deal Strategy',
+      description: 'Plan your close approach',
+      url: '/agents?agent=closer',
+    },
+  ];
 }
 
 export async function GET(request: NextRequest) {
   try {
-    // Parse query parameters from HubSpot
     const searchParams = request.nextUrl.searchParams;
 
     const context: HubSpotCardRequest = {
@@ -171,19 +235,22 @@ export async function GET(request: NextRequest) {
       contactJobTitle: searchParams.get('jobtitle') || undefined,
     };
 
-    // Get contextual prompts
-    const prompts = getContextualPrompts(
+    // Get agent recommendations
+    const recommendations = getAgentRecommendations(
       context.associatedObjectType,
       context.dealStage,
       context.contactJobTitle
     );
 
-    // Build card rows
-    const promptRows = prompts.map((prompt) => ({
-      type: 'LINK' as const,
-      text: prompt.title,
-      linkUrl: `https://gtm-skills.com/prompts/saas/${prompt.category}?utm_source=hubspot&utm_medium=crm-card`,
-    }));
+    // Build card rows with agent branding
+    const agentRows = recommendations.map((rec) => {
+      const agent = agents[rec.agent];
+      return {
+        type: 'LINK' as const,
+        text: `${agent.icon} ${rec.action}`,
+        linkUrl: `https://gtm-skills.com${rec.url}&utm_source=hubspot&utm_medium=crm-card&portal=${context.portalId}`,
+      };
+    });
 
     // Build the CRM card response
     const cardResponse = {
@@ -191,32 +258,42 @@ export async function GET(request: NextRequest) {
         {
           objectId: context.associatedObjectId,
           title: 'GTM Skills',
-          link: 'https://gtm-skills.com?utm_source=hubspot',
+          link: 'https://gtm-skills.com/agents?utm_source=hubspot',
           sections: [
             {
-              id: 'recommendations',
+              id: 'agents',
               title: context.associatedObjectType === 'CONTACT'
-                ? 'Outreach Prompts'
-                : `${stageToCategory(context.dealStage).toUpperCase()} Stage Prompts`,
-              rows: promptRows,
+                ? '📧 Outreach Actions'
+                : `🎯 ${context.dealStage || 'Deal'} Actions`,
+              rows: agentRows,
             },
             {
-              id: 'actions',
-              title: 'Quick Actions',
+              id: 'team',
+              title: '👥 Your Sales Team',
               rows: [
                 {
                   type: 'LINK',
-                  text: 'Browse All Prompts',
-                  linkUrl: 'https://gtm-skills.com/prompts?utm_source=hubspot',
+                  text: '🔍 Scout - Research',
+                  linkUrl: 'https://gtm-skills.com/api/v1/agents/scout/skill?utm_source=hubspot',
                 },
                 {
                   type: 'LINK',
-                  text: 'View Leaderboard',
-                  linkUrl: 'https://gtm-skills.com/leaderboard?utm_source=hubspot',
+                  text: '✍️ Writer - Copy',
+                  linkUrl: 'https://gtm-skills.com/api/v1/agents/writer/skill?utm_source=hubspot',
+                },
+                {
+                  type: 'LINK',
+                  text: '📧 Rep - Outreach',
+                  linkUrl: 'https://gtm-skills.com/api/v1/agents/rep/skill?utm_source=hubspot',
+                },
+                {
+                  type: 'LINK',
+                  text: '🎯 Closer - Deals',
+                  linkUrl: 'https://gtm-skills.com/api/v1/agents/closer/skill?utm_source=hubspot',
                 },
               ],
             },
-          ] as CRMCardSection[],
+          ],
         },
       ],
       primaryAction: {
@@ -231,7 +308,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(cardResponse, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'max-age=60', // Cache for 1 minute
+        'Cache-Control': 'max-age=60',
       },
     });
   } catch (error) {
@@ -243,7 +320,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// Handle preflight requests
 export async function OPTIONS() {
   return new NextResponse(null, {
     headers: {

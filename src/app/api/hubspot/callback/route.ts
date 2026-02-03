@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { storeTokens } from '@/lib/hubspot';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs'; // Need nodejs for Supabase
 
 /**
  * HubSpot OAuth Callback Endpoint
@@ -78,22 +79,20 @@ export async function GET(request: NextRequest) {
     const portalResponse = await fetch('https://api.hubapi.com/oauth/v1/access-tokens/' + tokens.access_token);
     const portalInfo = await portalResponse.json();
 
-    // In production, store tokens in database with portal_id as key
-    // For now, we'll just redirect to success page
+    // Store tokens in Supabase
+    const stored = await storeTokens({
+      portal_id: portalInfo.hub_id,
+      user_id: portalInfo.user_id,
+      access_token: tokens.access_token,
+      refresh_token: tokens.refresh_token,
+      expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
+    });
+
     console.log('HubSpot Connected:', {
       portalId: portalInfo.hub_id,
       userId: portalInfo.user_id,
-      expiresIn: tokens.expires_in,
+      stored,
     });
-
-    // TODO: Store in Supabase
-    // await supabase.from('hubspot_connections').upsert({
-    //   portal_id: portalInfo.hub_id,
-    //   user_id: portalInfo.user_id,
-    //   access_token: tokens.access_token,
-    //   refresh_token: tokens.refresh_token,
-    //   expires_at: new Date(Date.now() + tokens.expires_in * 1000).toISOString(),
-    // });
 
     // Clear the state cookie and redirect to success
     const response = NextResponse.redirect(
