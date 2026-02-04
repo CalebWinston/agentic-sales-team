@@ -1,130 +1,180 @@
-# Meet the Team
+# GTM Agent Fleet
 
-Three AI agents. Three channels. Your 24/7 sales team.
+Five AI agents. One sales team. Running 24/7.
 
-| Agent | Role | Email |
-|-------|------|-------|
-| **Scout** | Research & Intelligence | scout@gtm-skills.com |
-| **Rep** | Outreach & Engagement | rep@gtm-skills.com |
-| **Closer** | Deals & Revenue | closer@gtm-skills.com |
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      MISSION CONTROL                             │
+│                    (Chief of Staff)                              │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+           ┌──────────────────┼──────────────────┐
+           ▼                  ▼                  ▼
+     ┌──────────┐      ┌──────────┐      ┌──────────┐
+     │  SCOUT   │ ───▶ │  WRITER  │ ───▶ │   REP    │ ───▶ CLOSER
+     │ Research │      │   Copy   │      │ Outreach │      Deals
+     └──────────┘      └──────────┘      └──────────┘
+```
+
+## The Team
+
+| Agent | Role | Heartbeat | Email |
+|-------|------|-----------|-------|
+| **Mission Control** | Fleet management, security, coordination | :00, :30 | chief@gtm-skills.com |
+| **Scout** | Research & Intelligence | :00, :15, :30, :45 | scout@gtm-skills.com |
+| **Writer** | Sales Copy & Content | :02, :17, :32, :47 | writer@gtm-skills.com |
+| **Rep** | Outreach & Engagement | :04, :19, :34, :49 | rep@gtm-skills.com |
+| **Closer** | Deals & Revenue | :06, :21, :36, :51 | closer@gtm-skills.com |
+
+## Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/gtm-skills/gtm
+cd gtm/openclaw-skills/deployment
+
+# 2. Deploy to your server
+./setup.sh your-server-ip
+
+# 3. Configure
+# Edit ~/.clawdbot/clawdbot.json with your tokens
+# Set ANTHROPIC_API_KEY and HUBSPOT_API_KEY
+
+# 4. Start
+clawdbot gateway start
+
+# 5. Verify
+clawdbot cron list
+```
+
+## Architecture
+
+This isn't a single AI assistant. It's a **self-maintaining fleet** that:
+
+- **Wakes on schedule** - Heartbeats every 15 minutes
+- **Remembers everything** - Persistent memory in files
+- **Coordinates work** - Handoffs through WORKING.md
+- **Learns and adapts** - Feedback compounds over time
+- **Secures itself** - Telegram lockdown, scoped permissions
+
+**Cost: ~$15-30/month** for a 24/7 sales team.
+
+Read the full architecture: [deployment/ARCHITECTURE.md](deployment/ARCHITECTURE.md)
+
+## File Structure
+
+```
+openclaw-skills/
+├── mission-control/
+│   └── SKILL.md          # Chief of Staff personality
+├── scout/
+│   └── SKILL.md          # Research agent personality
+├── writer/
+│   └── SKILL.md          # Copy agent personality
+├── rep/
+│   └── SKILL.md          # Outreach agent personality
+├── closer/
+│   └── SKILL.md          # Deals agent personality
+└── deployment/
+    ├── ARCHITECTURE.md   # Full system documentation
+    ├── setup.sh          # Deployment script
+    ├── config.template.json  # Secure config template
+    ├── MEMORY.md         # Long-term memory template
+    ├── STRATEGY-*.md     # Agent playbooks
+    ├── HEARTBEAT.md      # Wake checklists
+    ├── WORKING.md        # Pipeline state
+    └── PROGRESS.md       # Metrics tracking
+```
 
 ## How It Works
+
+### The Memory System
+
+Files are memory. Human-readable, editable, debuggable.
+
+| File | Purpose |
+|------|---------|
+| `SOUL.md` | Who am I? (personality) |
+| `MEMORY.md` | What have I learned? (patterns) |
+| `STRATEGY-*.md` | How do I operate? (playbooks) |
+| `WORKING.md` | What's happening now? (pipeline) |
+| `PROGRESS.md` | How are we doing? (metrics) |
+
+### The Heartbeat System
+
+Agents wake every 15 minutes, staggered:
+
+```
+:00  Mission Control + Scout
+:02  Writer
+:04  Rep
+:06  Closer
+```
+
+Each wake: read checklist → check for work → execute or HEARTBEAT_OK → sleep.
+
+### The Handoff System
+
+```
+Scout finds prospect → briefing in WORKING.md
+Writer reads briefing → drafts email → marks ready
+Rep reads copy → sends outreach → qualifies
+Closer reads handoff → proposals → closes
+```
+
+All coordination through one file. No database needed.
+
+### The Security Model
+
+1. **Telegram lockdown** - Specific chat IDs, user allowlists, @mention only
+2. **Workspace isolation** - Agents only access their workspace
+3. **Scoped permissions** - No sudo, no system access
+4. **Security audits** - Mission Control reviews changes
+
+## Usage
+
+### Talk to them like teammates
 
 ```
 You: "Find me SaaS companies hiring SDRs"
 Scout: "On it. What size? What stage? VP level or Director?"
 
 You: "Series B, VP of Sales"
-Scout: "Found 10. Top pick is Sarah Chen at Acme - just raised $25M,
-       hiring 5 SDRs. Want me to get her email and brief Rep?"
+Scout: "Found 10. Top pick is Sarah Chen at Acme - just raised $25M.
+        Want me to brief Writer?"
 
-You: "Yes"
-Scout: "Done. Rep, here's Sarah Chen. Angle: SDR ramp time."
+You → Writer: "Email Sarah"
+Writer: "Got the briefing. What tone - direct or challenger?"
 
-You → Rep: "Email Sarah"
-Rep: "Got it from Scout. What tone - direct, challenger, blunt?"
-
-You: "Challenger"
-Rep: [Writes email] "Ready. Want a sequence too, or just this one?"
-
-[Sarah responds: "We're already using a competitor"]
-
-You → Rep: "She said they're using a competitor"
-Rep: "Classic. Here are 3 responses. The Chris Voss one usually
-     works best. Also - how long have they been with them?"
-
-[Meeting happens, she's interested]
+[Email written, sent by Rep, meeting booked]
 
 You → Closer: "She wants a proposal"
-Closer: "Great. Before I write this - who else needs to approve?
-         And what did she say the main pain is?"
-
-You: "She's the decision maker. Pain is SDR ramp time"
-Closer: [Writes proposal] "Done. But before you send - do we know
-         the timeline? That affects how I'd position the pricing."
+Closer: "Great. Who else needs to approve? What's the main pain?"
 ```
 
-## They're Proactive
+### They're proactive
 
 Every agent:
 - Asks clarifying questions before acting
 - Suggests next steps after delivering
 - Flags problems before they become issues
-- Pushes the deal forward, not just responds
+- Never ends without a question or suggestion
 
-**They never end a response without a question or suggestion.**
+## Resources
 
-## They Use GTM Skills
+- **GTM Skills**: [gtm-skills.com](https://gtm-skills.com)
+- **OpenClaw Docs**: [docs.openclaw.ai](https://docs.openclaw.ai)
+- **Prompts Library**: [gtm-skills.com/prompts](https://gtm-skills.com/prompts)
+- **Tonalities**: [gtm-skills.com/free-tools/tonalities](https://gtm-skills.com/free-tools/tonalities)
 
-All agents pull from **gtm-skills.com**:
+## Credits
 
-| Resource | URL |
-|----------|-----|
-| 420+ Prompts | gtm-skills.com/prompts |
-| 24 Tonalities | gtm-skills.com/free-tools/tonalities |
-| Voice Templates | gtm-skills.com/voice-templates |
-| Voicemail Scripts | gtm-skills.com/voice-templates?category=voicemail |
-| Methodologies | gtm-skills.com/methodology |
-| Workflows | gtm-skills.com/workflow |
-| Agentic BDR | gtm-skills.com/agentic-bdr |
+Inspired by [@dr_cintas](https://twitter.com/dr_cintas)'s Mission Control architecture for running multiple AI agents 24/7.
 
-## Setup
-
-### Option 1: Claude Projects
-Create 3 projects, paste each SKILL.md:
-
-1. **Scout** → `scout/SKILL.md`
-2. **Rep** → `rep/SKILL.md`
-3. **Closer** → `closer/SKILL.md`
-
-### Option 2: OpenClaw
-```bash
-npx clawdhub install gtm-skills/scout
-npx clawdhub install gtm-skills/rep
-npx clawdhub install gtm-skills/closer
-```
-
-### Option 3: Slack/Telegram
-Deploy as bots to 3 channels. Use `bots/telegram/` as a starting point.
-
-## The Flow
-
-```
-        SCOUT                      REP                      CLOSER
-   ┌────────────┐          ┌────────────┐          ┌────────────┐
-   │  Research  │          │  Outreach  │          │   Deals    │
-   │            │          │            │          │            │
-   │ • Find     │   ───▶   │ • Email    │   ───▶   │ • Propose  │
-   │ • Research │          │ • Voicemail│          │ • Negotiate│
-   │ • Enrich   │          │ • Follow   │          │ • Close    │
-   │ • Signal   │          │ • Handle   │          │ • Invoice  │
-   └────────────┘          └────────────┘          └────────────┘
-         │                       │                       │
-         └───────────────────────┴───────────────────────┘
-                                 │
-                                 ▼
-                       ┌─────────────────────┐
-                       │   gtm-skills.com    │
-                       │ prompts • tonalities │
-                       │ templates • methods  │
-                       └─────────────────────┘
-```
-
-## Talk to Them Like Teammates
-
-Don't give commands. Have conversations.
-
-| Instead of... | Try... |
-|---------------|--------|
-| "Write email" | "Email Sarah at Acme - she's hiring SDRs" |
-| "Handle objection" | "She said they're not interested" |
-| "Send proposal" | "She wants pricing. $2K/mo range?" |
-| "Leave voicemail" | "Drop a voicemail - saw she's hiring" |
-
-They'll ask for what they need.
+Built by [Prospeda](https://prospeda.com). Ship deals, not features.
 
 ---
 
-**Scout** finds. **Rep** engages. **Closer** closes.
+**Scout** finds. **Writer** crafts. **Rep** engages. **Closer** closes. **Mission Control** coordinates.
 
 *What are we working on today?*
