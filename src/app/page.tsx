@@ -203,7 +203,7 @@ export default function Home() {
               </Badge>
               <Badge variant="outline" className="border-green-500/30 text-green-400">
                 <Clock className="h-3 w-3 mr-1" />
-                Updated Jan 2026
+                Updated Feb 2026
               </Badge>
             </div>
 
